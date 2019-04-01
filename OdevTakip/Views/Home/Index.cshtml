@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Kullanıcı Kayıt</h1>
+    <div class="card" style="width: 36rem;">
+        <div class="card-body">
+            <h5 class="card-title">Lütfen Kullanıcı Bilgilerini Giriniz</h5>
+            <form action="/Home/KullaniciInsert" method="post">
+                <div class="form-group">
+                    <label>Ad</label>
+                    <input type="text" class="form-control" placeholder="Ad" name="ad" required>
+                </div>
+                <div class="form-group">
+                    <label>Soyad</label>
+                    <input type="text" class="form-control" placeholder="Soyad" name="soyad" required>
+                </div>
+                <div class="form-group">
+                    <label>Cinsiyet</label>
+                    <select class="form-control" name="cinsiyet" required>
+                        <option value="Bay">Bay</option>
+                        <option value="Bayan">Bayan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Eposta</label>
+                    <input type="email" class="form-control" placeholder="Eposta" name="eposta" required>
+                </div>
+                <div class="form-group">
+                    <label>Şifre</label>
+                    <input type="password" class="form-control" placeholder="Şifre" name="sifre" required>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" required id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </form>
+        </div>
+    </div>
+</div>
