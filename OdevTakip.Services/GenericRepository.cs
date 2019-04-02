@@ -1,7 +1,9 @@
 ﻿using Dapper;
 using Npgsql;
+using OdevTakip.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OdevTakip.Services
 {
@@ -12,6 +14,8 @@ namespace OdevTakip.Services
         IEnumerable<dynamic> Select(string sql, object model = null);
 
         T First<T>(string sql, object model) where T : class;
+
+        List<TList> Select<TList>(string sql, object model) where TList : class;
     }
 
     /// <summary>
@@ -58,7 +62,7 @@ namespace OdevTakip.Services
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -84,5 +88,24 @@ namespace OdevTakip.Services
             }
         }
 
+        public List<TList> Select<TList>(string sql, object model) where TList : class
+        {
+            try
+            {
+                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
+                {
+                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
+                    {
+                        npgsqlConnection.Open();
+                    }
+
+                    return npgsqlConnection.Query<TList>(sql, model).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

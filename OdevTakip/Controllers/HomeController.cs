@@ -2,14 +2,26 @@
 using OdevTakip.Entities;
 using OdevTakip.Models;
 using OdevTakip.Services;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace OdevTakip.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()=>View();
+        private readonly IGrupService _grupService;
 
+        public HomeController(IGrupService grupService)
+        {
+            _grupService = grupService;
+        }
+
+        public IActionResult Index()
+        {
+            List<Grup> grupListesi = _grupService.Select(new Grup());
+
+            return View(grupListesi);
+        }
 
         public IActionResult Privacy()
         {

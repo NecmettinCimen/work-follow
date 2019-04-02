@@ -36,7 +36,7 @@ namespace OdevTakip.Controllers
             else
             {
                 ViewData["error"] = "true";
-                return Redirect("/Account/Login");
+                return Redirect("/Account/Register");
             }
         }
 
@@ -47,11 +47,12 @@ namespace OdevTakip.Controllers
             Kullanici result = _kullaniciService.LoginKontrol(model);
             if (result!=null)
             {
+                // o an sisteme giriş yapan kullanıcı sakladıgımız yer
                 HttpContext.Session.SetInt32("kullaniciid", result.Id);
                 HttpContext.Session.SetString("ad", result.Ad);
                 HttpContext.Session.SetString("soyad", result.Soyad);
 
-                return Redirect("/Home");
+                return Redirect("/Home/Index");
             }
             else
             {

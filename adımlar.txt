@@ -1,0 +1,3 @@
+
+1.Adım
+	View - Html - Form - input - tablo(nesne) -> service -> method -> test

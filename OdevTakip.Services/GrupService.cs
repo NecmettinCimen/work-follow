@@ -8,6 +8,7 @@ namespace OdevTakip.Services
     public interface IGrupService
     {
         bool Insert(Grup model);
+        List<Grup> Select(Grup model);
     }
 
     public class GrupService : IGrupService
@@ -21,5 +22,8 @@ namespace OdevTakip.Services
 
         public bool Insert(Grup model) => _genericRepository.Insert(@"INSERT INTO public.grup(aktif, sil, olusturmatarihi, olusturankisi, guncellemetarihi, guncelleyenkisi, ad, aciklama, yoneticiid)
 	                                                                                        VALUES (@aktif, @sil, @olusturmatarihi, @olusturankisi, @guncellemetarihi, @guncelleyenkisi, @ad, @aciklama, @yoneticiid);", model);
+
+        public List<Grup> Select(Grup model) => _genericRepository.Select<Grup>("select * from public.Grup", model);
+
     }
 }

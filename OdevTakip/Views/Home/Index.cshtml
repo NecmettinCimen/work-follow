@@ -1,5 +1,7 @@
-﻿@{
+﻿@model  List<OdevTakip.Entities.Grup>
+@{
     ViewData["Title"] = "Home Page";
+    string error = ViewData["success"] as string;
 }
 
 
@@ -47,6 +49,19 @@
                         </div>
                     </div>
                 </div>
+                @if (error == "true")
+                {
+                    <div class="alert alert-success" role="alert">
+                        A simple danger alert—check it out!
+                    </div>
+                }
+                @if (error == "false")
+                {
+                    <div class="alert alert-danger" role="alert">
+                        A simple danger alert—check it out!
+                    </div>
+                }
+
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#teams" role="tab" aria-controls="teams" aria-selected="true">Teams</a>
@@ -81,279 +96,71 @@
                         <!--end of content list head-->
                         <div class="content-list-body row">
 
-                            <div class="col-md-6">
-                                <div class="card card-team">
-                                    <div class="card-body">
-                                        <div class="dropdown card-options">
-                                            <button class="btn-options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="material-icons">more_vert</i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">Manage</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="#">Leave Team</a>
+                            @foreach (OdevTakip.Entities.Grup grup in Model)
+                            {
+                                <div class="col-md-6">
+                                    <div class="card card-team">
+                                        <div class="card-body">
+                                            <div class="dropdown card-options">
+                                                <button class="btn-options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="material-icons">more_vert</i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Manage</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#">Leave Team</a>
+                                                </div>
                                             </div>
+                                            <div class="card-title">
+                                                <a href="#">
+                                                    <h5 data-filter-by="text">@grup.ad</h5>
+                                                </a>
+                                                <span>@grup.aciklama</span>
+                                            </div>
+                                            <ul class="avatars">
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Kenny">
+                                                        <img alt="Kenny Tran" class="avatar" src="\assets\img\avatar-male-6.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="David">
+                                                        <img alt="David Whittaker" class="avatar" src="\assets\img\avatar-male-4.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Sally">
+                                                        <img alt="Sally Harper" class="avatar" src="\assets\img\avatar-female-3.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Kristina">
+                                                        <img alt="Kristina Van Der Stroem" class="avatar" src="\assets\img\avatar-female-4.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Claire">
+                                                        <img alt="Claire Connors" class="avatar" src="\assets\img\avatar-female-1.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Marcus">
+                                                        <img alt="Marcus Simmons" class="avatar" src="\assets\img\avatar-male-1.jpeg">
+                                                    </a>
+                                                </li>
+
+                                            </ul>
                                         </div>
-                                        <div class="card-title">
-                                            <a href="#">
-                                                <h5 data-filter-by="text">Medium Rare</h5>
-                                            </a>
-                                            <span>4 Projects, 6 Members</span>
-                                        </div>
-                                        <ul class="avatars">
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Kenny">
-                                                    <img alt="Kenny Tran" class="avatar" src="\assets\img\avatar-male-6.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="David">
-                                                    <img alt="David Whittaker" class="avatar" src="\assets\img\avatar-male-4.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Sally">
-                                                    <img alt="Sally Harper" class="avatar" src="\assets\img\avatar-female-3.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Kristina">
-                                                    <img alt="Kristina Van Der Stroem" class="avatar" src="\assets\img\avatar-female-4.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Claire">
-                                                    <img alt="Claire Connors" class="avatar" src="\assets\img\avatar-female-1.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Marcus">
-                                                    <img alt="Marcus Simmons" class="avatar" src="\assets\img\avatar-male-1.jpeg">
-                                                </a>
-                                            </li>
-
-                                        </ul>
                                     </div>
                                 </div>
-                            </div>
+                            }
 
-                            <div class="col-md-6">
-                                <div class="card card-team">
-                                    <div class="card-body">
-                                        <div class="dropdown card-options">
-                                            <button class="btn-options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="material-icons">more_vert</i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">Manage</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="#">Leave Team</a>
-                                            </div>
-                                        </div>
-                                        <div class="card-title">
-                                            <a href="#">
-                                                <h5 data-filter-by="text">Front-Enders</h5>
-                                            </a>
-                                            <span>2 Projects, 3 Members</span>
-                                        </div>
-                                        <ul class="avatars">
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="David">
-                                                    <img alt="David Whittaker" class="avatar" src="\assets\img\avatar-male-4.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Krishna">
-                                                    <img alt="Krishna Bajaj" class="avatar" src="\assets\img\avatar-female-6.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Peggy">
-                                                    <img alt="Peggy Brown" class="avatar" src="\assets\img\avatar-female-2.jpeg">
-                                                </a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="card card-team">
-                                    <div class="card-body">
-                                        <div class="dropdown card-options">
-                                            <button class="btn-options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="material-icons">more_vert</i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">Manage</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="#">Leave Team</a>
-                                            </div>
-                                        </div>
-                                        <div class="card-title">
-                                            <a href="#">
-                                                <h5 data-filter-by="text">Pipeline Leadership</h5>
-                                            </a>
-                                            <span>4 Projects, 9 Members</span>
-                                        </div>
-                                        <ul class="avatars">
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Marcus">
-                                                    <img alt="Marcus Simmons" class="avatar" src="\assets\img\avatar-male-1.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Claire">
-                                                    <img alt="Claire Connors" class="avatar" src="\assets\img\avatar-female-1.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Harry">
-                                                    <img alt="Harry Xai" class="avatar" src="\assets\img\avatar-male-2.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Kristina">
-                                                    <img alt="Kristina Van Der Stroem" class="avatar" src="\assets\img\avatar-female-4.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Kenny">
-                                                    <img alt="Kenny Tran" class="avatar" src="\assets\img\avatar-male-6.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Sally">
-                                                    <img alt="Sally Harper" class="avatar" src="\assets\img\avatar-female-3.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="David">
-                                                    <img alt="David Whittaker" class="avatar" src="\assets\img\avatar-male-4.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Ravi">
-                                                    <img alt="Ravi Singh" class="avatar" src="\assets\img\avatar-male-3.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Masimba">
-                                                    <img alt="Masimba Sibanda" class="avatar" src="\assets\img\avatar-male-5.jpeg">
-                                                </a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="card card-team">
-                                    <div class="card-body">
-                                        <div class="dropdown card-options">
-                                            <button class="btn-options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="material-icons">more_vert</i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">Manage</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="#">Leave Team</a>
-                                            </div>
-                                        </div>
-                                        <div class="card-title">
-                                            <a href="#">
-                                                <h5 data-filter-by="text">User Experience</h5>
-                                            </a>
-                                            <span>5 Projects, 4 Members</span>
-                                        </div>
-                                        <ul class="avatars">
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="David">
-                                                    <img alt="David Whittaker" class="avatar" src="\assets\img\avatar-male-4.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Peggy">
-                                                    <img alt="Peggy Brown" class="avatar" src="\assets\img\avatar-female-2.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Kristina">
-                                                    <img alt="Kristina Van Der Stroem" class="avatar" src="\assets\img\avatar-female-4.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Ravi">
-                                                    <img alt="Ravi Singh" class="avatar" src="\assets\img\avatar-male-3.jpeg">
-                                                </a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="card card-team">
-                                    <div class="card-body">
-                                        <div class="dropdown card-options">
-                                            <button class="btn-options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="material-icons">more_vert</i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">Manage</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="#">Leave Team</a>
-                                            </div>
-                                        </div>
-                                        <div class="card-title">
-                                            <a href="#">
-                                                <h5 data-filter-by="text">Founders</h5>
-                                            </a>
-                                            <span>3 Projects, 2 Members</span>
-                                        </div>
-                                        <ul class="avatars">
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="David">
-                                                    <img alt="David Whittaker" class="avatar" src="\assets\img\avatar-male-4.jpeg">
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" data-toggle="tooltip" title="Marcus">
-                                                    <img alt="Marcus Simmons" class="avatar" src="\assets\img\avatar-male-1.jpeg">
-                                                </a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                         <!--end of content-list-body-->
@@ -753,7 +560,7 @@
                     </div>
                     <!--end of tab-->
                 </div>
-                <form class="modal fade" action="/Home/InsertTeam" method="post" id="team-add-modal" tabindex="-1" role="dialog" aria-labelledby="team-add-modal" aria-hidden="true">
+                <form class="modal fade" action="/Team/InsertTeam" method="post" id="team-add-modal" tabindex="-1" role="dialog" aria-labelledby="team-add-modal" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -777,11 +584,11 @@
                                         <h6>Team Details</h6>
                                         <div class="form-group row align-items-center">
                                             <label class="col-3">Name</label>
-                                            <input class="form-control col" type="text" placeholder="Team name" name="team-name">
+                                            <input class="form-control col" type="text" placeholder="Team name" name="ad">
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-3">Description</label>
-                                            <textarea class="form-control col" rows="3" placeholder="Team description" name="team-description"></textarea>
+                                            <textarea class="form-control col" rows="3" placeholder="Team description" name="aciklama"></textarea>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="team-add-members" role="tabpanel" aria-labelledby="team-add-members-tab">
