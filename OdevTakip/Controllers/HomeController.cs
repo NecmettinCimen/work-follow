@@ -22,14 +22,7 @@ namespace OdevTakip.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public ActionResult KullaniciInsert(Kullanici model)
-        {
-            KullaniciService kullaniciService = new KullaniciService();
-
-            kullaniciService.Insert(model);
-
-            return View("Index");
-        }
+        
 
     }
 }

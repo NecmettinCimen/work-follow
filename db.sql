@@ -1,6 +1,6 @@
 
 
-create database dbplanla
+create database dbodevtakip
 
 create table Kullanici(
 Id serial,
