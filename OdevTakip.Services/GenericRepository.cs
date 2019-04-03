@@ -16,6 +16,8 @@ namespace OdevTakip.Services
         T First<T>(string sql, object model) where T : class;
 
         List<TList> Select<TList>(string sql, object model) where TList : class;
+
+        bool Delete(string sql, Grup model);
     }
 
     /// <summary>
@@ -25,6 +27,28 @@ namespace OdevTakip.Services
     {
         private static readonly string connectionString =
             "User ID=postgres;Password=localpass;Host=localhost;Port=5432;Database=dbodevtakip;";
+
+        public bool Delete(string sql, Grup model)
+        {
+            try
+            {
+                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
+                {
+                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
+                    {
+                        npgsqlConnection.Open();
+                    }
+
+                    npgsqlConnection.Execute(sql, model);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
         public T First<T>(string sql, object model) where T: class
         {

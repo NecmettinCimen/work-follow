@@ -162,6 +162,28 @@
 
     </div>
 
+    <form class="modal fade" method="post" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">delete</h5>
+                    <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input hidden id="deleteInput" name="Id" />
+                </div>
+                <!--end of modal body-->
+                <div class="modal-footer">
+                    <button role="button" class="btn btn-primary" type="submit">
+                        Done
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
 
     <script asp-append-version="true" type="text/javascript" src="~/js/jquery-3.2.1.min.js"></script>
     <script asp-append-version="true" type="text/javascript" src="~/js/autosize.min.js"></script>
@@ -173,6 +195,8 @@
     <script asp-append-version="true" type="text/javascript" src="~/js/list.min.js"></script>
     <script asp-append-version="true" type="text/javascript" src="~/js/bootstrap.min.js"></script>
     <script asp-append-version="true" type="text/javascript" src="~/assets/js/theme.js"></script>
+    <script asp-append-version="true" src="~/js/sweetalert2.js"></script>
+    <script asp-append-version="true" src="~/js/site.js"></script>
 
 
     <link href="~/css/login.css" rel="stylesheet" />
