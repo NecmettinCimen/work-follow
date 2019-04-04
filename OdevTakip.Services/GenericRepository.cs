@@ -132,4 +132,31 @@ namespace OdevTakip.Services
             }
         }
     }
+
+    public class SGenericRepository
+    {
+        private static readonly string connectionString =
+            "User ID=postgres;Password=localpass;Host=localhost;Port=5432;Database=dbodevtakip;";
+
+        public List<TList> Select<TList>(string sql, object model) where TList : class
+        {
+            try
+            {
+                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
+                {
+                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
+                    {
+                        npgsqlConnection.Open();
+                    }
+
+                    return npgsqlConnection.Query<TList>(sql, model).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+    }
 }

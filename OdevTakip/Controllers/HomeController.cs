@@ -10,10 +10,12 @@ namespace OdevTakip.Controllers
     public class HomeController : Controller
     {
         private readonly IGrupService _grupService;
+        private readonly IProjeService _projeService;
 
-        public HomeController(IGrupService grupService)
+        public HomeController(IGrupService grupService, IProjeService projeService)
         {
             _grupService = grupService;
+            _projeService = projeService;
         }
 
         public IActionResult Index()

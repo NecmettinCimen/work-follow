@@ -20,14 +20,16 @@ namespace OdevTakip.Services
 
         public bool Insert(Kullanici model)
         {
-            return _genericRepository.Insert(@"INSERT INTO public.kullanici
+            const string sql = @"INSERT INTO public.kullanici
                                             (aktif, sil, olusturmatarihi, olusturankisi, guncellemetarihi, guncelleyenkisi, ad, soyad, cinsiyet, telefon, eposta, sifre, unvani, egitim, sirket)
-                                            VALUES(@aktif, @sil, @olusturmatarihi, @olusturankisi, @guncellemetarihi, @guncelleyenkisi, @ad, @soyad, @cinsiyet, @telefon, @eposta, @sifre, @unvani, @egitim, @sirket);", model);
+                                            VALUES(@aktif, @sil, @olusturmatarihi, @olusturankisi, @guncellemetarihi, @guncelleyenkisi, @ad, @soyad, @cinsiyet, @telefon, @eposta, @sifre, @unvani, @egitim, @sirket);";
+            return _genericRepository.Insert(sql, model);
         }
 
         public Kullanici LoginKontrol(Kullanici model)
         {
-            return _genericRepository.First<Kullanici>(@"select Id, ad, soyad from public.kullanici where eposta = @eposta and sifre = @sifre", model);
+            const string sql = @"select Id, ad, soyad from public.kullanici where eposta = @eposta and sifre = @sifre";
+            return _genericRepository.First<Kullanici>(sql, model);
         }
     }
 }

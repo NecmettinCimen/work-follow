@@ -19,12 +19,24 @@ namespace OdevTakip.Services
             _genericRepository = genericRepository;
         }
 
-        public bool Delete(Grup model) => _genericRepository.Delete(@"update public.grup set sil=1 where Id = @Id", model);
+        public bool Delete(Grup model)
+        {
+            const string sql = @"update public.grup set sil=true where Id = @Id";
+            return _genericRepository.Delete(sql, model);
+        }
 
-        public bool Insert(Grup model) => _genericRepository.Insert(@"INSERT INTO public.grup(aktif, sil, olusturmatarihi, olusturankisi, guncellemetarihi, guncelleyenkisi, ad, aciklama, yoneticiid)
-	                                                                                        VALUES (@aktif, @sil, @olusturmatarihi, @olusturankisi, @guncellemetarihi, @guncelleyenkisi, @ad, @aciklama, @yoneticiid);", model);
+        public bool Insert(Grup model)
+        {
+            const string sql = @"INSERT INTO public.grup(aktif, sil, olusturmatarihi, olusturankisi, guncellemetarihi, guncelleyenkisi, ad, aciklama, yoneticiid)
+                                VALUES (@aktif, @sil, @olusturmatarihi, @olusturankisi, @guncellemetarihi, @guncelleyenkisi, @ad, @aciklama, @yoneticiid);";
+            return _genericRepository.Insert(sql, model);
+        }
 
-        public List<Grup> Select(Grup model) => _genericRepository.Select<Grup>("select * from public.Grup where sil=@sil", model);
+        public List<Grup> Select(Grup model)
+        {
+            const string sql = "select * from public.Grup where sil=@sil";
+            return _genericRepository.Select<Grup>(sql, model);
+        }
 
     }
 }

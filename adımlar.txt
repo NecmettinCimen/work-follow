@@ -1,3 +1,7 @@
 
-1.Adım
+1.Adım (create oluşturmak)
 	View - Html - Form - input - tablo(nesne) -> service -> method -> test
+
+2.Adım (list veri çekmek için)
+	method(nesne listesi) -> service -> controller(nesne) -> view -> html -> test
+

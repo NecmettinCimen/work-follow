@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OdevTakip.Models;
 using OdevTakip.Services;
 using System;
 
@@ -43,6 +44,10 @@ namespace OdevTakip
             services.AddFactory<IGenericRepository, GenericRepository>();
             services.AddFactory<IKullaniciService, KullaniciService>();
             services.AddFactory<IGrupService, GrupService>();
+            services.AddFactory<IProjeService, ProjeService>();
+
+            //ilk atamaları yapabilmek için
+            GenericModels.Nesne();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

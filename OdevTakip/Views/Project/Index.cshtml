@@ -1,0 +1,434 @@
+﻿@model List<OdevTakip.Entities.Proje>
+@{
+    ViewData["Title"] = "Home Page";
+    string error = ViewData["success"] as string;
+}
+
+
+<div class="main-container">
+
+    <div class="navbar bg-white breadcrumb-bar">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="index-1.html">Overview</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                    <a href="pages-app.html">App Pages</a>
+                </li>
+
+
+                <li class="breadcrumb-item active" aria-current="page">User</li>
+            </ol>
+        </nav>
+
+        <div class="dropdown">
+            <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">settings</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+
+                <a class="dropdown-item" href="#">Account Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" href="#">Log out</a>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-11 col-xl-10">
+                <div class="page-header mb-4">
+                    <div class="media">
+                        <img alt="Image" src="\assets\img\avatar-male-4.jpeg" class="avatar avatar-lg mt-1">
+                        <div class="media-body ml-3">
+                            <h1 class="mb-0">@Context.Session.GetString("ad") @Context.Session.GetString("soyad")</h1>
+                            <p class="lead">Interface designer and front-end developer</p>
+                        </div>
+                    </div>
+                </div>
+                @if (error == "true")
+                {
+                <div class="alert alert-success" role="alert">
+                    A simple danger alert—check it out!
+                </div>
+                }
+                @if (error == "false")
+                {
+                <div class="alert alert-danger" role="alert">
+                    A simple danger alert—check it out!
+                </div>
+                }
+
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Index">Teams</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#teams" role="tab" aria-controls="teams" aria-selected="true">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">Tasks</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="teams" role="tabpanel" aria-labelledby="teams-tab" data-filter-list="content-list-body">
+                        <div class="row content-list-head">
+                            <div class="col-auto">
+                                <h3>Project</h3>
+                                <button class="btn btn-round" data-toggle="modal" data-target="#project-add-modal">
+                                    <i class="material-icons">add</i>
+                                </button>
+                            </div>
+                            <form class="col-md-auto">
+                                <div class="input-group input-group-round">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">filter_list</i>
+                                        </span>
+                                    </div>
+                                    <input type="search" class="form-control filter-list-input" placeholder="Filter teams" aria-label="Filter teams" aria-describedby="filter-teams">
+                                </div>
+                            </form>
+                        </div>
+                        <!--end of content list head-->
+                        <div class="content-list-body row">
+
+                            @foreach (var proje in Model)
+                            {
+                            <div class="col-lg-6">
+                                <div class="card card-project">
+
+                                    <div class="card-body">
+                                        <div class="dropdown card-options">
+                                            <button class="btn-options" type="button" id="project-dropdown-button-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons">more_vert</i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#">Edit</a>
+                                                <a class="dropdown-item" href="#">Share</a>
+                                            </div>
+                                        </div>
+                                        <div class="card-title">
+                                            <a href="#">
+                                                <h5 data-filter-by="text">@proje.ad</h5>
+                                            </a>
+                                        </div>
+                                        <ul class="avatars">
+
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="David">
+                                                    <img alt="David Whittaker" class="avatar" src="\assets\img\avatar-male-4.jpeg" data-filter-by="alt">
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Masimba">
+                                                    <img alt="Masimba Sibanda" class="avatar" src="\assets\img\avatar-male-5.jpeg" data-filter-by="alt">
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Krishna">
+                                                    <img alt="Krishna Bajaj" class="avatar" src="\assets\img\avatar-female-6.jpeg" data-filter-by="alt">
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Harry">
+                                                    <img alt="Harry Xai" class="avatar" src="\assets\img\avatar-male-2.jpeg" data-filter-by="alt">
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                        <div class="card-meta d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <i class="material-icons mr-1">playlist_add_check</i>
+                                                <span class="text-small">0/5</span>
+                                            </div>
+                                            <span class="text-small" data-filter-by="text">Due 12 days</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+
+
+                        </div>
+                        <!--end of content-list-body-->
+                    </div>
+
+                    <div class="tab-pane fade" id="tasks" role="tabpanel" aria-labelledby="tasks-tab" data-filter-list="content-list-body">
+                        <div class="row content-list-head">
+                            <div class="col-auto">
+                                <h3>Tasks</h3>
+                            </div>
+                            <form class="col-md-auto">
+                                <div class="input-group input-group-round">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">filter_list</i>
+                                        </span>
+                                    </div>
+                                    <input type="search" class="form-control filter-list-input" placeholder="Filter tasks" aria-label="Filter Tasks" aria-describedby="filter-tasks">
+                                </div>
+                            </form>
+                        </div>
+                        <!--end of content list head-->
+                        <div class="content-list-body row">
+
+
+                            <div class="col-12">
+                                <div class="card card-task">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <a href="#">
+                                                <h6 data-filter-by="text">Client objective meeting</h6>
+                                            </a>
+                                            <span class="text-small">Today</span>
+                                        </div>
+                                        <div class="card-meta">
+                                            <ul class="avatars">
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Kenny">
+                                                        <img alt="Kenny Tran" class="avatar" src="\assets\img\avatar-male-6.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="David">
+                                                        <img alt="David Whittaker" class="avatar" src="\assets\img\avatar-male-4.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Sally">
+                                                        <img alt="Sally Harper" class="avatar" src="\assets\img\avatar-female-3.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Kristina">
+                                                        <img alt="Kristina Van Der Stroem" class="avatar" src="\assets\img\avatar-female-4.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Claire">
+                                                        <img alt="Claire Connors" class="avatar" src="\assets\img\avatar-female-1.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Marcus">
+                                                        <img alt="Marcus Simmons" class="avatar" src="\assets\img\avatar-male-1.jpeg">
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                            <div class="d-flex align-items-center">
+                                                <i class="material-icons">playlist_add_check</i>
+                                                <span>3/4</span>
+                                            </div>
+                                            <div class="dropdown card-options">
+                                                <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="material-icons">more_vert</i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Mark as done</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#">Archive</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-12">
+                                <div class="card card-task">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <a href="#">
+                                                <h6 data-filter-by="text">Target market trend analysis</h6>
+                                            </a>
+                                            <span class="text-small">5 days</span>
+                                        </div>
+                                        <div class="card-meta">
+                                            <ul class="avatars">
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Peggy">
+                                                        <img alt="Peggy Brown" class="avatar" src="\assets\img\avatar-female-2.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="David">
+                                                        <img alt="David Whittaker" class="avatar" src="\assets\img\avatar-male-4.jpeg">
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                            <div class="d-flex align-items-center">
+                                                <i class="material-icons">playlist_add_check</i>
+                                                <span>2/10</span>
+                                            </div>
+                                            <div class="dropdown card-options">
+                                                <button class="btn-options" type="button" id="task-dropdown-button-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="material-icons">more_vert</i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Mark as done</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#">Archive</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="card card-task">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <a href="#">
+                                                <h6 data-filter-by="text">Assemble Outcomes Report for client</h6>
+                                            </a>
+                                            <span class="text-small">7 days</span>
+                                        </div>
+                                        <div class="card-meta">
+                                            <ul class="avatars">
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Marcus">
+                                                        <img alt="Marcus Simmons" class="avatar" src="\assets\img\avatar-male-1.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="Claire">
+                                                        <img alt="Claire Connors" class="avatar" src="\assets\img\avatar-female-1.jpeg">
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" data-toggle="tooltip" title="David">
+                                                        <img alt="David Whittaker" class="avatar" src="\assets\img\avatar-male-4.jpeg">
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                            <div class="d-flex align-items-center">
+                                                <i class="material-icons">playlist_add_check</i>
+                                                <span>0/6</span>
+                                            </div>
+                                            <div class="dropdown card-options">
+                                                <button class="btn-options" type="button" id="task-dropdown-button-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="material-icons">more_vert</i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Mark as done</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#">Archive</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!--end of content list-->
+                    </div>
+                    <!--end of tab-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <form class="modal fade" action="/Project/InsertProject" method="post" id="project-add-modal" tabindex="-1" role="dialog" aria-labelledby="project-add-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Project</h5>
+                    <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="project-add-details" role="tabpanel" aria-labelledby="project-add-details-tab">
+                            <h6>General Details</h6>
+                            <div class="form-group row align-items-center">
+                                <label class="col-3">Name</label>
+                                <input class="form-control col" type="text" placeholder="Project name" name="ad">
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Description</label>
+                                <textarea class="form-control col" rows="3" placeholder="Project description" name="aciklama"></textarea>
+                            </div>
+                            <hr>
+                            <h6>Timeline</h6>
+                            <div class="form-group row align-items-center">
+                                <label class="col-3">Start Date</label>
+                                <input class="form-control col" type="date" placeholder="Project start" name="baslangictarihi">
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label class="col-3">Due Date</label>
+                                <input class="form-control col" type="date" placeholder="Project due" name="bitistarihi">
+                            </div>
+                            <div class="alert alert-warning text-small" role="alert">
+                                <span>You can change due dates at any time.</span>
+                            </div>
+                            <hr>
+                            <h6>Other</h6>
+                            <div class="form-group row align-items-center">
+                                <label class="col-3">Category</label>
+                                <select class="form-control col" name="kategoriid">
+                                    @Html.Raw(GenericModels.kategoriOptionString)
+                                </select>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label class="col-3">Status</label>
+                                <select class="form-control col" name="durumid">
+                                    @Html.Raw(GenericModels.durumOptionString)
+                                </select>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label class="col-3">Team</label>
+                                <select class="form-control col" name="grupid">
+                                    @Html.Raw(GenericModels.grupOptionString)
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!--end of modal body-->
+                <div class="modal-footer">
+                    <button role="button" class="btn btn-primary" type="submit">
+                        Create Project
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

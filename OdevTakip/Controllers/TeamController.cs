@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OdevTakip.Entities;
+using OdevTakip.Models;
 using OdevTakip.Services;
 
 namespace OdevTakip.Controllers
@@ -28,6 +29,8 @@ namespace OdevTakip.Controllers
 
             if (result)
             {
+                GenericModels.GrupOptionRefresh();
+
                 ViewData["success"] = "true";
             }
             else
@@ -38,7 +41,7 @@ namespace OdevTakip.Controllers
             return Redirect("/Home/Index");
         }
 
-        [HttpDelete]
+        [HttpPost]
         public ActionResult DeleteTeam(Grup model)
         {
             bool result = _grupService.Delete(model);
