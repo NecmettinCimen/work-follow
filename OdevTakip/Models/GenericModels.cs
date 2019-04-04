@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace OdevTakip.Models
 { 
-
+    /// <summary>
+    /// singleton
+    /// </summary>
     public  class GenericModels
     {
         private static GenericModels nesne;

@@ -41,6 +41,7 @@ namespace OdevTakip
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //factory method tanımlamaları
             services.AddFactory<IGenericRepository, GenericRepository>();
             services.AddFactory<IKullaniciService, KullaniciService>();
             services.AddFactory<IGrupService, GrupService>();

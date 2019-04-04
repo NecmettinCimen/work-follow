@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using OdevTakip.Entities;
 using OdevTakip.Models;
 using OdevTakip.Services;
@@ -20,7 +21,8 @@ namespace OdevTakip.Controllers
 
         public IActionResult Index()
         {
-            List<Grup> grupListesi = _grupService.Select(new Grup());
+            int sessionKisiId = HttpContext.Session.GetInt32("kullaniciid").Value;
+            List<Grup> grupListesi = _grupService.Select(new Grup() { Olusturankisi = sessionKisiId });
 
             return View(grupListesi);
         }

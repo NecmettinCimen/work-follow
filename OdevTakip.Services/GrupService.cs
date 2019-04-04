@@ -34,7 +34,7 @@ namespace OdevTakip.Services
 
         public List<Grup> Select(Grup model)
         {
-            const string sql = "select * from public.Grup where sil=@sil";
+            const string sql = "select * from public.Grup where sil=@sil and olusturankisi = @olusturankisi";
             return _genericRepository.Select<Grup>(sql, model);
         }
 

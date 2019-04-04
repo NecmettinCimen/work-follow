@@ -17,7 +17,7 @@ namespace OdevTakip.Services
 
         List<TList> Select<TList>(string sql, object model) where TList : class;
 
-        bool Delete(string sql, Grup model);
+        bool Delete(string sql, object model);
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ namespace OdevTakip.Services
         private static readonly string connectionString =
             "User ID=postgres;Password=localpass;Host=localhost;Port=5432;Database=dbodevtakip;";
 
-        public bool Delete(string sql, Grup model)
+        public bool Delete(string sql, object model)
         {
             try
             {

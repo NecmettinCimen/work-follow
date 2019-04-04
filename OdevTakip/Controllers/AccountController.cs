@@ -14,22 +14,31 @@ namespace OdevTakip.Controllers
             _kullaniciService = kullaniciService;
         }
 
-        public IActionResult Index() => View("Login");
+        public IActionResult Index()
+        {
+            return View("Login");
+        }
 
-        public IActionResult Login() => View();
+        public IActionResult Login()
+        {
+            return View();
+        }
 
-        public IActionResult Register() => View();
+        public IActionResult Register()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Register(Kullanici model)
         {
 
-            bool result = _kullaniciService.Insert(model);
-            if (result)
+            Kullanici result = _kullaniciService.Insert(model);
+            if (result != null)
             {
-                HttpContext.Session.SetInt32("kullaniciid", model.Id);
-                HttpContext.Session.SetString("ad", model.Ad);
-                HttpContext.Session.SetString("soyad", model.Soyad);
+                HttpContext.Session.SetInt32("kullaniciid", result.Id);
+                HttpContext.Session.SetString("ad", result.Ad);
+                HttpContext.Session.SetString("soyad", result.Soyad);
 
                 return Redirect("/Home/Index");
             }
@@ -45,7 +54,7 @@ namespace OdevTakip.Controllers
         {
 
             Kullanici result = _kullaniciService.LoginKontrol(model);
-            if (result!=null)
+            if (result != null)
             {
                 // o an sisteme giriş yapan kullanıcı sakladıgımız yer
                 HttpContext.Session.SetInt32("kullaniciid", result.Id);
@@ -59,6 +68,12 @@ namespace OdevTakip.Controllers
                 ViewData["error"] = "true";
                 return View();
             }
+        }
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("/Account/Login");
         }
 
     }

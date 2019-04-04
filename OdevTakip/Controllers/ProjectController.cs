@@ -17,7 +17,8 @@ namespace OdevTakip.Controllers
 
         public IActionResult Index()
         {
-            List<Proje> projes = _projeService.Select(new Proje());
+            int sessionKisiId = HttpContext.Session.GetInt32("kullaniciid").Value;
+            List<Proje> projes = _projeService.Select(new Proje() { Olusturankisi = sessionKisiId });
 
             return View(projes);
         }
@@ -30,6 +31,23 @@ namespace OdevTakip.Controllers
             model.Olusturankisi = model.yoneticiid;
 
             bool result = _projeService.Insert(model);
+
+            return Redirect("/Project/Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProject(Proje model)
+        {
+            bool result = _projeService.Delete(model);
+
+            if (result)
+            {
+                ViewData["success"] = "true";
+            }
+            else
+            {
+                ViewData["success"] = "false";
+            }
 
             return Redirect("/Project/Index");
         }

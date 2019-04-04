@@ -109,6 +109,7 @@
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="#">Edit</a>
                                                 <a class="dropdown-item" href="#">Share</a>
+                                                <button type="button" class="dropdown-item text-danger" onclick="deleteAnyItem('/Project/DeleteProject', @proje.Id)">Delete</button>
                                             </div>
                                         </div>
                                         <div class="card-title">
@@ -146,9 +147,9 @@
                                         <div class="card-meta d-flex justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <i class="material-icons mr-1">playlist_add_check</i>
-                                                <span class="text-small">0/5</span>
+                                                @*<span class="text-small">0/5</span>*@
                                             </div>
-                                            <span class="text-small" data-filter-by="text">Due 12 days</span>
+                                            <span class="text-small" data-filter-by="text">@((proje.bitistarihi-DateTime.Now).Days) Gün Kaldı Bitiş Tarihine</span>
                                         </div>
                                     </div>
                                 </div>
