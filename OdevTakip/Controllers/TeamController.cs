@@ -23,9 +23,18 @@ namespace OdevTakip.Controllers
         [HttpPost]
         public ActionResult InsertTeam(Grup model)
         {
-            model.yoneticiid = HttpContext.Session.GetInt32("kullaniciid").Value;
-            model.Olusturankisi = model.yoneticiid;
-            bool result = _grupService.Insert(model);
+            bool result = false;
+            if (model.Id == 0)
+            {
+                model.yoneticiid = HttpContext.Session.GetInt32("kullaniciid").Value;
+                model.Olusturankisi = model.yoneticiid;
+                result = _grupService.Insert(model);
+            }
+            else
+            {
+                model.Guncelleyenkisi = HttpContext.Session.GetInt32("kullaniciid").Value;
+                result = _grupService.Update(model);
+            }
 
             if (result)
             {
@@ -42,20 +51,17 @@ namespace OdevTakip.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteTeam(Grup model)
+        public ActionResult DeleteTeam([FromBody]Grup model)
         {
             bool result = _grupService.Delete(model);
+            return Json(result);
+        }
 
-            if (result)
-            {
-                ViewData["success"] = "true";
-            }
-            else
-            {
-                ViewData["success"] = "false";
-            }
-
-            return Redirect("/Home/Index");
+        [HttpPost]
+        public ActionResult EditTeam([FromBody]Grup model)
+        {
+            Grup result = _grupService.First(model);
+            return Json(result);
         }
     }
 }

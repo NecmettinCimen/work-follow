@@ -18,6 +18,8 @@ namespace OdevTakip.Services
         List<TList> Select<TList>(string sql, object model) where TList : class;
 
         bool Delete(string sql, object model);
+
+        bool Update(string sql, object model);
     }
 
     /// <summary>
@@ -129,6 +131,28 @@ namespace OdevTakip.Services
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        public bool Update(string sql, object model)
+        {
+            try
+            {
+                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
+                {
+                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
+                    {
+                        npgsqlConnection.Open();
+                    }
+
+                    npgsqlConnection.Execute(sql, model);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }
