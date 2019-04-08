@@ -11,10 +11,13 @@
     <link href="~/css/icon.css" rel="stylesheet" />
     <link href="~/css/css.css" rel="stylesheet" />
     <link href="~/assets/css/theme.css" rel="stylesheet" type="text/css" media="all">
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 
 <body>
 
+    <span style="display:none" id="firstName">@Context.Session.GetString("ad")</span>
+    <span style="display:none" id="lastName">@Context.Session.GetString("soyad")</span>
 
     <div class="layout layout-nav-side">
         <div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
@@ -39,7 +42,7 @@
                 </div>
             </div>
             <div class="collapse navbar-collapse flex-column" id="navbar-collapse">
-                
+
                 <div class="d-none d-lg-block w-100">
                     <span class="text-small text-muted">Quick Links</span>
                     <ul class="nav nav-small flex-column mt-2">
@@ -49,16 +52,16 @@
                         <li class="nav-item">
                             <a href="/Project/Index" class="nav-link">Project</a>
                         </li>
-                        
+
                     </ul>
                     <hr>
                 </div>
-                
+
             </div>
             <div class="d-none d-lg-block">
                 <div class="dropup">
-                    <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img alt="Image" src="\assets\img\avatar-male-4.jpeg" class="avatar">
+                    <a class="profileImage" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        
                     </a>
                     <div class="dropdown-menu">
                         <a href="nav-side-user.html" class="dropdown-item">Profile</a>
@@ -72,28 +75,6 @@
         @RenderBody()
 
     </div>
-
-    <form class="modal fade" method="post" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Delete this item?</h5>
-                    <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
-                        <i class="material-icons">close</i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input hidden id="deleteInput" name="Id" />
-                </div>
-                <!--end of modal body-->
-                <div class="modal-footer">
-                    <button role="button" class="btn btn-primary" type="submit">
-                        Done
-                    </button>
-                </div>
-            </div>
-        </div>
-    </form>
 
 
     <script asp-append-version="true" type="text/javascript" src="~/js/jquery-3.2.1.min.js"></script>

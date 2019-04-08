@@ -40,14 +40,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-11 col-xl-10">
-                <div class="page-header mb-4">
-                    <div class="media">
-                        <img alt="Image" src="\assets\img\avatar-male-4.jpeg" class="avatar avatar-lg mt-1">
-                        <div class="media-body ml-3">
-                            <h1 class="mb-0">@Context.Session.GetString("ad") @Context.Session.GetString("soyad")</h1>
-                            <p class="lead">Interface designer and front-end developer</p>
-                        </div>
-                    </div>
+                <div class="page-header mb-1">
+                    
                 </div>
                 @if (error == "true")
                 {
@@ -107,8 +101,7 @@
                                                 <i class="material-icons">more_vert</i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item" href="#">Share</a>
+                                                <button type="button" class="dropdown-item" onclick="editAnyItem(this)" data-url="/Project/EditProject" data-form="project-add-modal" data-id="@proje.Id">Edit</button>
                                                 <button type="button" class="dropdown-item text-danger" onclick="deleteAnyItem('/Project/DeleteProject', @proje.Id)">Delete</button>
                                             </div>
                                         </div>
@@ -379,21 +372,21 @@
                             <h6>General Details</h6>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Name</label>
-                                <input class="form-control col" type="text" placeholder="Project name" name="ad">
+                                <input class="form-control col" type="text" placeholder="Project name" name="ad" id="project-add-modal_ad">
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Description</label>
-                                <textarea class="form-control col" rows="3" placeholder="Project description" name="aciklama"></textarea>
+                                <textarea class="form-control col" rows="3" placeholder="Project description" name="aciklama" id="project-add-modal_aciklama"></textarea>
                             </div>
                             <hr>
                             <h6>Timeline</h6>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Start Date</label>
-                                <input class="form-control col" type="date" placeholder="Project start" name="baslangictarihi">
+                                <input class="form-control col" type="date" placeholder="Project start" name="baslangictarihi" id="project-add-modal_baslangictarihi">
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Due Date</label>
-                                <input class="form-control col" type="date" placeholder="Project due" name="bitistarihi">
+                                <input class="form-control col" type="date" placeholder="Project due" name="bitistarihi" id="project-add-modal_bitistarihi">
                             </div>
                             <div class="alert alert-warning text-small" role="alert">
                                 <span>You can change due dates at any time.</span>
@@ -402,21 +395,31 @@
                             <h6>Other</h6>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Category</label>
-                                <select class="form-control col" name="kategoriid">
-                                    @Html.Raw(GenericModels.kategoriOptionString)
-                                </select>
+                                <div class="col-7">
+                                    <select class="form-control" name="kategoriid" id="project-add-modal_kategoriid">
+                                        @Html.Raw(GenericModels.kategoriOptionString)
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary col-2" onclick="SharedAdd(this)" data-type="kategori" data-name="kategoriid" data-title="Category" data-modal="project-add-modal">Add</button>
+
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Status</label>
-                                <select class="form-control col" name="durumid">
-                                    @Html.Raw(GenericModels.durumOptionString)
-                                </select>
+                                <div class="col-7">
+                                    <select class="form-control col" name="durumid" id="project-add-modal_durumid">
+                                        @Html.Raw(GenericModels.durumOptionString)
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary col-2" onclick="SharedAdd(this)" data-type="durum" data-name="durumid" data-title="Status" data-modal="project-add-modal" >Add</button>
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Team</label>
-                                <select class="form-control col" name="grupid">
-                                    @Html.Raw(GenericModels.grupOptionString)
-                                </select>
+                                <div class="col-7">
+                                    <select class="form-control col" name="grupid" id="project-add-modal_grupid">
+                                        @Html.Raw(GenericModels.grupOptionString)
+                                    </select>
+                                </div>
+                                <a href="/" class="btn btn-primary col-2">Add</a>
                             </div>
                         </div>
                         

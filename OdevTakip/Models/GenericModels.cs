@@ -1,44 +1,26 @@
 ﻿using OdevTakip.Entities;
 using OdevTakip.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OdevTakip.Models
-{ 
+{
     /// <summary>
     /// singleton
     /// </summary>
-    public  class GenericModels
+    public class GenericModels
     {
         private static GenericModels nesne;
 
-        private readonly SGenericRepository sGenericRepository;
+        private static readonly SGenericRepository sGenericRepository = new SGenericRepository();
         public static string kategoriOptionString { get; internal set; }
         public static string durumOptionString { get; internal set; }
         public static string grupOptionString { get; internal set; }
 
         private GenericModels()
         {
-            sGenericRepository = new SGenericRepository();
-            List<AdEntity> kategoriList = sGenericRepository.Select<AdEntity>("select * from public.kategori", null);
+            KategoriOptionRefresh(null);
 
-            kategoriOptionString = "";
-
-            foreach (AdEntity item in kategoriList)
-            {
-                kategoriOptionString += $"<option value='{item.id}'>{item.ad}</option>";
-            }
-
-            List<AdEntity> durumList = sGenericRepository.Select<AdEntity>("select * from public.durum", null);
-
-            durumOptionString = "";
-
-            foreach (AdEntity item in durumList)
-            {
-                durumOptionString += $"<option value='{item.id}'>{item.ad}</option>";
-            }
+            DurumOptionRefresh(null);
 
             GrupOptionRefresh();
 
@@ -49,11 +31,41 @@ namespace OdevTakip.Models
 
         }
 
+        public static void KategoriOptionRefresh(List<AdEntity> kategoriList)
+        {
+            if (kategoriList == null)
+            {
+                kategoriList = sGenericRepository.Select<AdEntity>("select * from public.kategori");
+            }
+
+            kategoriOptionString = "";
+
+            foreach (AdEntity item in kategoriList)
+            {
+                kategoriOptionString += $"<option value='{item.id}'>{item.ad}</option>";
+            }
+        }
+
+        public static void DurumOptionRefresh(List<AdEntity> durumList)
+        {
+            if (durumList == null)
+            {
+                durumList = sGenericRepository.Select<AdEntity>("select * from public.durum");
+            }
+
+            durumOptionString = "";
+
+            foreach (AdEntity item in durumList)
+            {
+                durumOptionString += $"<option value='{item.id}'>{item.ad}</option>";
+            }
+        }
+
         public static void GrupOptionRefresh()
         {
             grupOptionString = "";
 
-            List<AdEntity> grupList = new SGenericRepository().Select<AdEntity>("select * from public.grup", null);
+            List<AdEntity> grupList = sGenericRepository.Select<AdEntity>("select * from public.grup");
 
             foreach (AdEntity item in grupList)
             {
@@ -66,7 +78,10 @@ namespace OdevTakip.Models
         public static GenericModels Nesne()
         {
             if (nesne == null)
+            {
                 nesne = new GenericModels();
+
+            }
 
             return nesne;
         }

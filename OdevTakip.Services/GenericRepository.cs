@@ -15,7 +15,7 @@ namespace OdevTakip.Services
 
         T First<T>(string sql, object model) where T : class;
 
-        List<TList> Select<TList>(string sql, object model) where TList : class;
+        List<TList> Select<TList>(string sql, object model = null) where TList : class;
 
         bool Delete(string sql, object model);
 
@@ -114,7 +114,7 @@ namespace OdevTakip.Services
             }
         }
 
-        public List<TList> Select<TList>(string sql, object model) where TList : class
+        public List<TList> Select<TList>(string sql, object model = null) where TList : class
         {
             try
             {
@@ -162,7 +162,7 @@ namespace OdevTakip.Services
         private static readonly string connectionString =
             "User ID=postgres;Password=localpass;Host=localhost;Port=5432;Database=dbodevtakip;";
 
-        public List<TList> Select<TList>(string sql, object model) where TList : class
+        public List<TList> Select<TList>(string sql, object model = null) where TList : class
         {
             try
             {

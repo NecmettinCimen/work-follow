@@ -40,14 +40,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-11 col-xl-10">
-                <div class="page-header mb-4">
-                    <div class="media">
-                        <img alt="Image" src="\assets\img\avatar-male-4.jpeg" class="avatar avatar-lg mt-1">
-                        <div class="media-body ml-3">
-                            <h1 class="mb-0">@Context.Session.GetString("ad") @Context.Session.GetString("soyad")</h1>
-                            <p class="lead">Interface designer and front-end developer</p>
-                        </div>
-                    </div>
+                <div class="page-header mb-1">
+
                 </div>
                 @if (error == "true")
                 {
@@ -106,7 +100,7 @@
                                                     <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <button type="button" class="dropdown-item" onclick="editAnyItem(this)" data-url="/Team/EditTeam" data-form="team-add-modal" data-id="@grup.Id" >Manage</button>
+                                                    <button type="button" class="dropdown-item" onclick="editAnyItem(this)" data-url="/Team/EditTeam" data-form="team-add-modal" data-id="@grup.Id">Manage</button>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item text-danger" href="#">Leave Team</a>
                                                     <button type="button" class="dropdown-item text-danger" onclick="deleteAnyItem('/Team/DeleteTeam', @grup.Id)">Delete</button>

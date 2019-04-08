@@ -36,20 +36,17 @@ namespace OdevTakip.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteProject(Proje model)
+        public ActionResult EditProject([FromBody]Proje model)
+        {
+            Proje result = _projeService.First(model);
+            return Json(result);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProject([FromBody]Proje model)
         {
             bool result = _projeService.Delete(model);
-
-            if (result)
-            {
-                ViewData["success"] = "true";
-            }
-            else
-            {
-                ViewData["success"] = "false";
-            }
-
-            return Redirect("/Project/Index");
+            return Json(result);
         }
     }
 }

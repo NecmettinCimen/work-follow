@@ -8,6 +8,7 @@ namespace OdevTakip.Services
         bool Insert(Proje model);
         List<Proje> Select(Proje model);
         bool Delete(Proje model);
+        Proje First(Proje model);
     }
     public class ProjeService : IProjeService
     {
@@ -21,6 +22,12 @@ namespace OdevTakip.Services
         {
             const string sql = @"update public.proje set sil=true where Id = @Id";
             return _genericRepository.Delete(sql, model);
+        }
+
+        public Proje First(Proje model)
+        {
+            const string sql = @"select * from public.proje  where Id = @Id";
+            return _genericRepository.First<Proje>(sql, model);
         }
 
         public bool Insert(Proje model)
