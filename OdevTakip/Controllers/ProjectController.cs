@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OdevTakip.Entities;
+using OdevTakip.Models;
 using OdevTakip.Services;
 using System.Collections.Generic;
 
@@ -31,6 +32,9 @@ namespace OdevTakip.Controllers
             model.Olusturankisi = model.yoneticiid;
 
             bool result = _projeService.Insert(model);
+
+            if (result)
+                GenericModels.ProjeOptionRefresh(null);
 
             return Redirect("/Project/Index");
         }

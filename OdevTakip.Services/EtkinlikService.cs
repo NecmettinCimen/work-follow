@@ -49,7 +49,7 @@ namespace OdevTakip.Services
 	                                sil, olusturmatarihi, olusturankisi, guncellemetarihi, guncelleyenkisi, baslik, aciklama, durumid, kategoriid, baslangictarihi, bitistarihi, atananid, projeid)
 	                                VALUES (@sil, @olusturmatarihi, @olusturankisi, @guncellemetarihi, @guncelleyenkisi, @baslik, @aciklama, @durumid, @kategoriid, @baslangictarihi, @bitistarihi, @atananid, @projeid);";
 
-            return _genericRepository.Update(sql, model);
+            return _genericRepository.Insert(sql, model);
         }
 
         public bool Update(Etkinlik model)

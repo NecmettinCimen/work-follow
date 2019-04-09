@@ -46,6 +46,7 @@ namespace OdevTakip
             services.AddFactory<IKullaniciService, KullaniciService>();
             services.AddFactory<IGrupService, GrupService>();
             services.AddFactory<IProjeService, ProjeService>();
+            services.AddFactory<IEtkinlikService, EtkinlikService>();
 
             //ilk atamaları yapabilmek için
             GenericModels.Nesne();

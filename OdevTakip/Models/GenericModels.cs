@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 namespace OdevTakip.Models
 {
-    /// <summary>
-    /// singleton
-    /// </summary>
     public class GenericModels
     {
         private static GenericModels nesne;
@@ -15,6 +12,7 @@ namespace OdevTakip.Models
         public static string kategoriOptionString { get; internal set; }
         public static string durumOptionString { get; internal set; }
         public static string grupOptionString { get; internal set; }
+        public static string projeOptionString { get; internal set; }
 
         private GenericModels()
         {
@@ -23,6 +21,8 @@ namespace OdevTakip.Models
             DurumOptionRefresh(null);
 
             GrupOptionRefresh();
+
+            ProjeOptionRefresh(null);
 
         }
 
@@ -35,7 +35,7 @@ namespace OdevTakip.Models
         {
             if (kategoriList == null)
             {
-                kategoriList = sGenericRepository.Select<AdEntity>("select * from public.kategori");
+                kategoriList = sGenericRepository.Select<AdEntity>("select * from public.kategori where sil=false");
             }
 
             kategoriOptionString = "";
@@ -50,7 +50,7 @@ namespace OdevTakip.Models
         {
             if (durumList == null)
             {
-                durumList = sGenericRepository.Select<AdEntity>("select * from public.durum");
+                durumList = sGenericRepository.Select<AdEntity>("select * from public.durum where sil=false");
             }
 
             durumOptionString = "";
@@ -61,11 +61,27 @@ namespace OdevTakip.Models
             }
         }
 
+
+        public static void ProjeOptionRefresh(List<AdEntity> projeList)
+        {
+            if (projeList == null)
+            {
+                projeList = sGenericRepository.Select<AdEntity>("select * from public.proje where sil=false");
+            }
+
+            projeOptionString = "";
+
+            foreach (AdEntity item in projeList)
+            {
+                projeOptionString += $"<option value='{item.id}'>{item.ad}</option>";
+            }
+        }
+
         public static void GrupOptionRefresh()
         {
             grupOptionString = "";
 
-            List<AdEntity> grupList = sGenericRepository.Select<AdEntity>("select * from public.grup");
+            List<AdEntity> grupList = sGenericRepository.Select<AdEntity>("select * from public.grup where sil=false");
 
             foreach (AdEntity item in grupList)
             {
@@ -75,6 +91,9 @@ namespace OdevTakip.Models
         }
 
 
+        /// <summary>
+        /// singleton
+        /// </summary>
         public static GenericModels Nesne()
         {
             if (nesne == null)
