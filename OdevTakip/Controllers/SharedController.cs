@@ -44,7 +44,7 @@ namespace OdevTakip.Controllers
 
                 return Json(adEntities);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;

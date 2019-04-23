@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using Npgsql;
-using OdevTakip.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,7 @@ namespace OdevTakip.Services
     public interface IGenericRepository
     {
         bool Insert(string sql, object model = null);
+        int InsertAndGetId(string sql, object model = null);
 
         IEnumerable<dynamic> Select(string sql, object model = null);
 
@@ -25,7 +25,7 @@ namespace OdevTakip.Services
     /// <summary>
     /// Database üzerinde tüm işlemleri yapmamızı sağlar
     /// </summary>
-    public class GenericRepository: IGenericRepository
+    public class GenericRepository : IGenericRepository
     {
         private static readonly string connectionString =
             "User ID=postgres;Password=localpass;Host=localhost;Port=5432;Database=dbodevtakip;";
@@ -46,13 +46,13 @@ namespace OdevTakip.Services
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
         }
 
-        public T First<T>(string sql, object model) where T: class
+        public T First<T>(string sql, object model) where T : class
         {
             try
             {
@@ -66,7 +66,7 @@ namespace OdevTakip.Services
                     return npgsqlConnection.QueryFirst<T>(sql, model);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -88,9 +88,34 @@ namespace OdevTakip.Services
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
+            }
+        }
+
+        public int InsertAndGetId(string sql, object model = null)
+        {
+            try
+            {
+                int id = 0;
+                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
+                {
+                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
+                    {
+                        npgsqlConnection.Open();
+                    }
+
+                    sql += " RETURNING Id";
+
+                    id =  npgsqlConnection.QueryFirst<int>(sql, model);
+                }
+
+                return id;
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
 
@@ -150,7 +175,7 @@ namespace OdevTakip.Services
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

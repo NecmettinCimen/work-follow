@@ -43,18 +43,6 @@
                 <div class="page-header mb-1">
                     
                 </div>
-                @if (error == "true")
-                {
-                <div class="alert alert-success" role="alert">
-                    A simple danger alert—check it out!
-                </div>
-                }
-                @if (error == "false")
-                {
-                <div class="alert alert-danger" role="alert">
-                    A simple danger alert—check it out!
-                </div>
-                }
 
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item">
@@ -71,7 +59,7 @@
                     <div class="tab-pane fade show active" id="teams" role="tabpanel" aria-labelledby="teams-tab" data-filter-list="content-list-body">
                         <div class="row content-list-head">
                             <div class="col-auto">
-                                <h3>Task</h3>
+                                <h3>Tasks</h3>
                                 <button class="btn btn-round" data-toggle="modal" data-target="#project-add-modal">
                                     <i class="material-icons">add</i>
                                 </button>
@@ -96,58 +84,20 @@
                                 <div class="col-12">
                                     <div class="card card-task">
                                         <div class="progress">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <div class="card-body">
                                             <div class="card-title">
-                                                <a href="#">
+                                                <a href="/Activity/Detail/@etkinlik.Id">
                                                     <h6 data-filter-by="text">@etkinlik.baslik</h6>
                                                 </a>
-                                                <span class="text-small">Today</span>
+                                                <span class="text-small">@etkinlik.bitistarihi.ToLongDateString()</span>
                                             </div>
                                             <div class="card-meta">
-                                                <ul class="avatars">
-
-                                                    <li>
-                                                        <a href="#" data-toggle="tooltip" title="Kenny">
-                                                            <img alt="Kenny Tran" class="avatar" src="\assets\img\avatar-male-6.jpeg">
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" data-toggle="tooltip" title="David">
-                                                            <img alt="David Whittaker" class="avatar" src="\assets\img\avatar-male-4.jpeg">
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" data-toggle="tooltip" title="Sally">
-                                                            <img alt="Sally Harper" class="avatar" src="\assets\img\avatar-female-3.jpeg">
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" data-toggle="tooltip" title="Kristina">
-                                                            <img alt="Kristina Van Der Stroem" class="avatar" src="\assets\img\avatar-female-4.jpeg">
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" data-toggle="tooltip" title="Claire">
-                                                            <img alt="Claire Connors" class="avatar" src="\assets\img\avatar-female-1.jpeg">
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" data-toggle="tooltip" title="Marcus">
-                                                            <img alt="Marcus Simmons" class="avatar" src="\assets\img\avatar-male-1.jpeg">
-                                                        </a>
-                                                    </li>
-
-                                                </ul>
+                                                
                                                 <div class="d-flex align-items-center">
                                                     <i class="material-icons">playlist_add_check</i>
-                                                    <span>3/4</span>
+                                                    
                                                 </div>
                                                 <div class="dropdown card-options">
                                                     <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -181,7 +131,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">New Project</h5>
+                    <h5 class="modal-title">New Task</h5>
                     <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
                         <i class="material-icons">close</i>
                     </button>
@@ -196,17 +146,17 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Description</label>
-                                <textarea class="form-control col" rows="3" placeholder="Project description" name="aciklama" id="project-add-modal_aciklama"></textarea>
+                                <textarea class="form-control col" rows="3" placeholder="Description" name="aciklama" id="project-add-modal_aciklama"></textarea>
                             </div>
                             <hr>
                             <h6>Timeline</h6>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Start Date</label>
-                                <input class="form-control col" type="date" placeholder="Project start" name="baslangictarihi" id="project-add-modal_baslangictarihi">
+                                <input class="form-control col" type="date" name="baslangictarihi" id="project-add-modal_baslangictarihi">
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Due Date</label>
-                                <input class="form-control col" type="date" placeholder="Project due" name="bitistarihi" id="project-add-modal_bitistarihi">
+                                <input class="form-control col" type="date" name="bitistarihi" id="project-add-modal_bitistarihi">
                             </div>
                             <div class="alert alert-warning text-small" role="alert">
                                 <span>You can change due dates at any time.</span>
@@ -248,7 +198,7 @@
                 <!--end of modal body-->
                 <div class="modal-footer">
                     <button role="button" class="btn btn-primary" type="submit">
-                        Create Project
+                        Done
                     </button>
                 </div>
             </div>
