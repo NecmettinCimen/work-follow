@@ -1,0 +1,182 @@
+﻿@model OdevTakip.Controllers.ActivityController.FilesDto;
+@{
+    ViewData["Title"] = "Home Page";
+    string error = ViewData["success"] as string;
+}
+
+@if (Model == null)
+{
+    <h3>Etkinlik Yok!</h3>
+}
+else
+{
+
+    <div class="main-container">
+
+        <div class="navbar bg-white breadcrumb-bar">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#">Overview</a>
+                    </li>
+
+                    <li class="breadcrumb-item">
+                        <a href="#">App Pages</a>
+                    </li>
+
+                    <li class="breadcrumb-item">
+                        <a href="/Activity/Index">Task</a>
+                    </li>
+
+
+                    <li class="breadcrumb-item active" aria-current="page">Detail</li>
+                </ol>
+            </nav>
+
+            <div class="dropdown">
+                <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="material-icons">settings</i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+
+                    <a class="dropdown-item" href="#">Account Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="#">Log out</a>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-11 col-xl-10">
+                    <div class="page-header mb-1">
+
+                    </div>
+                    <ul class="nav nav-tabs nav-fill">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Activity/Detail/@Model.etkinlik.Id">Files</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#teams" role="tab" aria-controls="teams" aria-selected="true">Files</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="teams" role="tabpanel" aria-labelledby="teams-tab" data-filter-list="content-list-body">
+                            <div class="row content-list-head">
+                                <div class="col-auto">
+                                    <h3>@Model.etkinlik.baslik</h3>
+                                    <button class="btn btn-round" data-toggle="modal" data-target="#project-add-modal">
+                                        <i class="material-icons">add</i>
+                                    </button>
+                                </div>
+                                <form class="col-md-auto">
+                                    <div class="input-group input-group-round">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">filter_list</i>
+                                            </span>
+                                        </div>
+                                        <input type="search" class="form-control filter-list-input" placeholder="Filter teams" aria-label="Filter teams" aria-describedby="filter-teams">
+                                    </div>
+                                </form>
+                            </div>
+                            <p>@Model.etkinlik.aciklama</p>
+                            <!--end of content list head-->
+                            <div class="content-list-body row">
+                                @foreach (var dokuman in Model.dokumanList)
+                                {
+
+                                    <div class="col-12">
+                                        <div class="card card-task">
+                                            <div class="progress">
+                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    <a href="#">
+                                                        <h6 data-filter-by="text">@dokuman.Ad</h6>
+                                                    </a>
+                                                    <span class="text-small">@dokuman.DokumanData</span>
+                                                </div>
+                                                <div class="card-meta">
+
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="material-icons">playlist_add_check</i>
+
+                                                    </div>
+                                                    <div class="dropdown card-options">
+                                                        <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="material-icons">more_vert</i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Mark as done</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <button type="button" class="dropdown-item text-danger" onclick="deleteAnyItem('/Activity/ActivityDelete', @dokuman.Id)">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                            <!--end of content-list-body-->
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <form enctype="multipart/form-data" class="modal fade" asp-controller="Activity" asp-action="Upload" method="post" id="project-add-modal" tabindex="-1" role="dialog" aria-labelledby="project-add-modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Files</h5>
+                        <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="project-add-details" role="tabpanel" aria-labelledby="project-add-details-tab">
+                                    <input hidden name="etkinlikid" value="@Model.etkinlik.Id" />
+                                    <div class="form-group row align-items-center">
+                                        <label class="col-3">File</label>
+                                        <input class="form-control col" name="file" type="file">
+                                    </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--end of modal body-->
+                    <div class="modal-footer">
+                        <button role="button" class="btn btn-primary" type="submit">
+                            Done
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    @section Scripts{
+        <script>
+    $(() => {
+    Dropzone.autoDiscover = false;
+        $("#dropzone").dropzone({
+    url: "/Activity/Upload",
+    sending: function(file, xhr, formData) {
+       formData.append("etkinlikid", @Model.etkinlik.Id);
+    }
+});
+    })
+        </script>
+    }
+
+}
