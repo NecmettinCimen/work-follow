@@ -40,13 +40,13 @@ namespace OdevTakip.Controllers
             return View(activityList);
         }
 
-        public class DetailDto
+        public class NotesDto
         {
             public Etkinlik etkinlik { get; set; }
             public List<TblNot> notList { get; set; }
         }
 
-        public IActionResult Detail(int id)
+        public IActionResult Notes(int id)
         {
             int kullaniciId = HttpContext.Session.GetInt32("kullaniciid").Value;
             Etkinlik activity = _etkinlikService.Find(new Etkinlik()
@@ -57,7 +57,7 @@ namespace OdevTakip.Controllers
 
             List<TblNot> tblNotList = _kullaniciNotService.Select(new KullaniciNot(kullaniciId, id));
 
-            return View(new DetailDto
+            return View(new NotesDto
             {
                 etkinlik = activity,
                 notList = tblNotList

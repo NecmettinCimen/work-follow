@@ -11,12 +11,10 @@ namespace OdevTakip.Controllers
     public class HomeController : Controller
     {
         private readonly IGrupService _grupService;
-        private readonly IProjeService _projeService;
 
-        public HomeController(IGrupService grupService, IProjeService projeService)
+        public HomeController(IGrupService grupService)
         {
             _grupService = grupService;
-            _projeService = projeService;
         }
 
         public IActionResult Index()
@@ -38,7 +36,7 @@ namespace OdevTakip.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        
+
 
     }
 }

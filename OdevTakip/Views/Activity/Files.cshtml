@@ -29,7 +29,7 @@ else
                     </li>
 
 
-                    <li class="breadcrumb-item active" aria-current="page">Detail</li>
+                    <li class="breadcrumb-item active" aria-current="page">Files</li>
                 </ol>
             </nav>
 
@@ -41,7 +41,7 @@ else
 
                     <a class="dropdown-item" href="#">Account Settings</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#">Log out</a>
+                    <a class="dropdown-item text-danger" href="/Account/Logout">Log out</a>
 
                 </div>
             </div>
@@ -55,7 +55,7 @@ else
                     </div>
                     <ul class="nav nav-tabs nav-fill">
                         <li class="nav-item">
-                            <a class="nav-link" href="/Activity/Detail/@Model.etkinlik.Id">Files</a>
+                            <a class="nav-link" href="/Activity/Notes/@Model.etkinlik.Id">Notes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#teams" role="tab" aria-controls="teams" aria-selected="true">Files</a>
@@ -90,14 +90,13 @@ else
                                     <div class="col-12">
                                         <div class="card card-task">
                                             <div class="progress">
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-dark" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                             <div class="card-body">
                                                 <div class="card-title">
-                                                    <a href="#">
+                                                    <a href="~/files/@dokuman.Ad" target="_blank">
                                                         <h6 data-filter-by="text">@dokuman.Ad</h6>
                                                     </a>
-                                                    <span class="text-small">@dokuman.DokumanData</span>
                                                 </div>
                                                 <div class="card-meta">
 
