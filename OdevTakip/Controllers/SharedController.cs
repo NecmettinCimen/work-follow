@@ -35,10 +35,10 @@ namespace OdevTakip.Controllers
                 switch (model.type)
                 {
                     case "durum":
-                        GenericModels.DurumOptionRefresh(null);
+                        GenericModels.DurumOptionRefresh();
                         break;
                     case "kategori":
-                        GenericModels.KategoriOptionRefresh(null);
+                        GenericModels.KategoriOptionRefresh();
                         break;
                 }
 

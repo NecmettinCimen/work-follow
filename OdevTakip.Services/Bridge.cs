@@ -5,6 +5,11 @@ using System.Text;
 
 namespace OdevTakip.Services
 {
+    /// <summary>
+    /// Implemantor arayüzü ile operasyonlar tanımlanır ve ConcreteImplemantor lar bu arayüzden türeyerek operasyonları gerçekleştirir. 
+    /// Abstraction abstract sınıfı ise içinde Implemantor arayüzünden referans barındırarak Implemantor daki operasyonları çalıştırır. 
+    /// RefinedAbstraction ise Abstraction u uygulayan gerçek sınıf veya senaryoya göre sınıflardır. Client ise Abstraction ve Implemantor türlerinden nesneleri üreterek yapıyı kullanır.
+    /// </summary>
     public abstract class AdEntity
     {
         public int id { get; set; }
@@ -52,27 +57,23 @@ namespace OdevTakip.Services
         {
             set { adEntity = value; }
         }
-        public abstract void Insert();
-        public abstract List<T> Select<T>() where T : AdEntity;
+        public abstract string Select();
     }
 
     public class EntityRefinedAbstraction : EntityAbstraction
     {
-        private static readonly SGenericRepository sGenericRepository = new SGenericRepository();
-
         public EntityRefinedAbstraction(AdEntity adEntity) : base(adEntity)
         {
 
         }
 
-        public override void Insert()
+        public override string Select()
         {
-            
-        }
+            List<string> adEntitys = SGenericRepository.Select("select * from public." + adEntity.ToString() + " where sil=false")
+                .Select(item => $"<option value='{item.id}'>{item.ad}</option>").ToList();
 
-        public override List<T> Select<T>()
-        {
-            return sGenericRepository.Select<T>("select * from public." + adEntity.ToString() + " where sil=false");
+            return String.Join("", adEntitys);
+
         }
     }
 

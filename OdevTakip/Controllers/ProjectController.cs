@@ -34,7 +34,7 @@ namespace OdevTakip.Controllers
             bool result = _projeService.Insert(model);
 
             if (result)
-                GenericModels.ProjeOptionRefresh(null);
+                GenericModels.ProjeOptionRefresh();
 
             return Redirect("/Project/Index");
         }
