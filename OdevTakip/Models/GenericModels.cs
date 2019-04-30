@@ -8,7 +8,7 @@ namespace OdevTakip.Models
     {
         private static GenericModels nesne;
 
-        private static readonly SGenericRepository sGenericRepository = new SGenericRepository();
+        private static EntityRefinedAbstraction entityRefinedAbstraction;
         public static string kategoriOptionString { get; internal set; }
         public static string durumOptionString { get; internal set; }
         public static string grupOptionString { get; internal set; }
@@ -31,42 +31,45 @@ namespace OdevTakip.Models
 
         }
 
-        public static void KategoriOptionRefresh(List<AdEntity> kategoriList)
+        public static void KategoriOptionRefresh(List<KategoriEntity> kategoriList)
         {
             if (kategoriList == null)
             {
-                kategoriList = sGenericRepository.Select<AdEntity>("select * from public.kategori where sil=false");
+                entityRefinedAbstraction = new EntityRefinedAbstraction(new KategoriEntity());
+                kategoriList = entityRefinedAbstraction.Select<KategoriEntity>();
             }
 
             kategoriOptionString = "";
 
-            foreach (AdEntity item in kategoriList)
+            foreach (KategoriEntity item in kategoriList)
             {
                 kategoriOptionString += $"<option value='{item.id}'>{item.ad}</option>";
             }
         }
 
-        public static void DurumOptionRefresh(List<AdEntity> durumList)
+        public static void DurumOptionRefresh(List<DurumEntity> durumList)
         {
             if (durumList == null)
             {
-                durumList = sGenericRepository.Select<AdEntity>("select * from public.durum where sil=false");
+                entityRefinedAbstraction = new EntityRefinedAbstraction(new DurumEntity());
+                durumList = entityRefinedAbstraction.Select<DurumEntity>();
             }
 
             durumOptionString = "";
 
-            foreach (AdEntity item in durumList)
+            foreach (DurumEntity item in durumList)
             {
                 durumOptionString += $"<option value='{item.id}'>{item.ad}</option>";
             }
         }
 
 
-        public static void ProjeOptionRefresh(List<AdEntity> projeList)
+        public static void ProjeOptionRefresh(List<ProjeEntity> projeList)
         {
             if (projeList == null)
             {
-                projeList = sGenericRepository.Select<AdEntity>("select * from public.proje where sil=false");
+                entityRefinedAbstraction = new EntityRefinedAbstraction(new ProjeEntity());
+                projeList = entityRefinedAbstraction.Select<ProjeEntity>();
             }
 
             projeOptionString = "";
@@ -81,9 +84,10 @@ namespace OdevTakip.Models
         {
             grupOptionString = "";
 
-            List<AdEntity> grupList = sGenericRepository.Select<AdEntity>("select * from public.grup where sil=false");
+            entityRefinedAbstraction = new EntityRefinedAbstraction(new GrupEntity());
+            List<GrupEntity> grupList = entityRefinedAbstraction.Select<GrupEntity>();
 
-            foreach (AdEntity item in grupList)
+            foreach (GrupEntity item in grupList)
             {
                 grupOptionString += $"<option value='{item.id}'>{item.ad}</option>";
             }
