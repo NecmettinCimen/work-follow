@@ -30,7 +30,7 @@ namespace OdevTakip.Services
         public List<Etkinlik> Select(Etkinlik model)
         {
             const string sql = @"SELECT id, sil, olusturmatarihi, olusturankisi, guncellemetarihi, guncelleyenkisi, baslik, aciklama, durumid, kategoriid, baslangictarihi, bitistarihi, atananid, projeid
-	                                FROM public.etkinlik where sil = @sil and olusturankisi=@olusturankisi;";
+	                                FROM public.etkinlik where sil = @sil and olusturankisi=@olusturankisi and projeid = CASE @projeid WHEN 0 THEN projeid ELSE @projeid END;";
 
             return _genericRepository.Select<Etkinlik>(sql, model);
         }

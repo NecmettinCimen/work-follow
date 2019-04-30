@@ -10,18 +10,61 @@ namespace OdevTakip.Controllers
     public class ProjectController : Controller
     {
         private readonly IProjeService _projeService;
+        private readonly IEtkinlikService _etkinlikService;
 
-        public ProjectController(IProjeService projeService)
+        public ProjectController(IProjeService projeService, IEtkinlikService etkinlikService)
         {
             _projeService = projeService;
+            _etkinlikService = etkinlikService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sort)
         {
             int sessionKisiId = HttpContext.Session.GetInt32("kullaniciid").Value;
             List<Proje> projes = _projeService.Select(new Proje() { Olusturankisi = sessionKisiId });
 
+            SortedList sortedList = new SortedList();
+
+            switch (sort)
+            {
+                case "Id":
+                    sortedList.SetSortStrategy(new IdSort());
+                    break;
+                default:
+                case "Date":
+                    sortedList.SetSortStrategy(new IdSort());
+                    break;
+            }
+
+            projes = sortedList.Sort<Proje>(projes);
+
             return View(projes);
+        }
+        public class ActivityDto
+        {
+            public ActivityDto()
+            {
+                activityList = new List<Etkinlik>();
+            }
+            public Proje proje { get; set; }
+            public List<Etkinlik> activityList { get; set; }
+        }
+
+        public IActionResult Activity(int id)
+        {
+            Proje proje = _projeService.First(new Proje { Id = id });
+
+            List<Etkinlik> activityList = _etkinlikService.Select(new Etkinlik()
+            {
+                Olusturankisi = HttpContext.Session.GetInt32("kullaniciid").Value,
+                projeid = id
+            });
+
+            return View(new ActivityDto
+            {
+                activityList = activityList,
+                proje = proje
+            });
         }
 
         [HttpPost]
