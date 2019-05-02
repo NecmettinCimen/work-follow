@@ -30,4 +30,11 @@
     <Folder Include="wwwroot\files\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Content Update="Views\Project\Activity.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

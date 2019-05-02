@@ -1,0 +1,208 @@
+﻿@model OdevTakip.Controllers.ProjectController.ActivityDto
+@{
+    ViewData["Title"] = "Home Page";
+    string error = ViewData["success"] as string;
+}
+
+@if (Model.proje == null)
+{
+    <h3>Proje Yok!</h3>
+}
+else
+{
+
+    <div class="main-container">
+
+        <div class="navbar bg-white breadcrumb-bar">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#">Overview</a>
+                    </li>
+
+                    <li class="breadcrumb-item">
+                        <a href="#">App Pages</a>
+                    </li>
+
+
+                    <li class="breadcrumb-item active" aria-current="page">Task</li>
+                </ol>
+            </nav>
+
+            <div class="dropdown">
+                <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="material-icons">settings</i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+
+                    <a class="dropdown-item" href="#">Account Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="/Account/Logout">Log out</a>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-11 col-xl-10">
+                    <div class="page-header mb-1">
+
+                    </div>
+
+                    <ul class="nav nav-tabs nav-fill">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Index">Teams</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Project/Index">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">Tasks</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="teams" role="tabpanel" aria-labelledby="teams-tab" data-filter-list="content-list-body">
+                            <div class="row content-list-head">
+                                <div class="col-auto">
+                                    <h3>@Model.proje.ad Tasks</h3>
+                                    <button class="btn btn-round" data-toggle="modal" data-target="#project-add-modal">
+                                        <i class="material-icons">add</i>
+                                    </button>
+                                </div>
+                                <form class="col-md-auto">
+                                    <div class="input-group input-group-round">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">filter_list</i>
+                                            </span>
+                                        </div>
+                                        <input type="search" class="form-control filter-list-input" placeholder="Filter teams" aria-label="Filter teams" aria-describedby="filter-teams">
+                                    </div>
+                                </form>
+                            </div>
+                            <!--end of content list head-->
+                            <div class="content-list-body row">
+
+                                @foreach (var etkinlik in Model.activityList)
+                                {
+
+                                    <div class="col-12">
+                                        <div class="card card-task">
+                                            <div class="progress">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    <a href="/Activity/Notes/@etkinlik.Id">
+                                                        <h6 data-filter-by="text">@etkinlik.baslik</h6>
+                                                    </a>
+                                                    <span class="text-small">@etkinlik.bitistarihi.ToLongDateString()</span>
+                                                </div>
+                                                <div class="card-meta">
+
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="material-icons">playlist_add_check</i>
+
+                                                    </div>
+                                                    <div class="dropdown card-options">
+                                                        <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="material-icons">more_vert</i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#">Mark as done</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <button type="button" class="dropdown-item text-danger" onclick="deleteAnyItem('/Activity/ActivityDelete', @etkinlik.Id)">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+
+                            </div>
+                            <!--end of content-list-body-->
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <form class="modal fade" action="/Activity/ActivitySave" method="post" id="project-add-modal" tabindex="-1" role="dialog" aria-labelledby="project-add-modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New Task</h5>
+                        <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input name="projeid" value="@Model.proje.Id" hidden />
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="project-add-details" role="tabpanel" aria-labelledby="project-add-details-tab">
+                                <h6>General Details</h6>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-3">Title</label>
+                                    <input class="form-control col" type="text" placeholder="Title" name="baslik" id="project-add-modal_ad">
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3">Description</label>
+                                    <textarea class="form-control col" rows="3" placeholder="Description" name="aciklama" id="project-add-modal_aciklama"></textarea>
+                                </div>
+                                <hr>
+                                <h6>Timeline</h6>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-3">Start Date</label>
+                                    <input class="form-control col" type="date" name="baslangictarihi" id="project-add-modal_baslangictarihi">
+                                </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-3">Due Date</label>
+                                    <input class="form-control col" type="date" name="bitistarihi" id="project-add-modal_bitistarihi">
+                                </div>
+                                <div class="alert alert-warning text-small" role="alert">
+                                    <span>You can change due dates at any time.</span>
+                                </div>
+                                <hr>
+                                <h6>Other</h6>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-3">Category</label>
+                                    <div class="col-7">
+                                        <select class="form-control" name="kategoriid" id="project-add-modal_kategoriid">
+                                            @Html.Raw(GenericModels.kategoriOptionString)
+                                        </select>
+                                    </div>
+                                    <button type="button" class="btn btn-primary col-2" onclick="SharedAdd(this)" data-type="kategori" data-name="kategoriid" data-title="Category" data-modal="project-add-modal">Add</button>
+
+                                </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-3">Status</label>
+                                    <div class="col-7">
+                                        <select class="form-control col" name="durumid" id="project-add-modal_durumid">
+                                            @Html.Raw(GenericModels.durumOptionString)
+                                        </select>
+                                    </div>
+                                    <button type="button" class="btn btn-primary col-2" onclick="SharedAdd(this)" data-type="durum" data-name="durumid" data-title="Status" data-modal="project-add-modal">Add</button>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--end of modal body-->
+                    <div class="modal-footer">
+                        <button role="button" class="btn btn-primary" type="submit">
+                            Done
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+}

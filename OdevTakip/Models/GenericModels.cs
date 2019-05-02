@@ -8,7 +8,7 @@ namespace OdevTakip.Models
     {
         private static GenericModels nesne;
 
-        private static readonly SGenericRepository sGenericRepository = new SGenericRepository();
+        private static EntityRefinedAbstraction entityRefinedAbstraction;
         public static string kategoriOptionString { get; internal set; }
         public static string durumOptionString { get; internal set; }
         public static string grupOptionString { get; internal set; }
@@ -16,13 +16,13 @@ namespace OdevTakip.Models
 
         private GenericModels()
         {
-            KategoriOptionRefresh(null);
+            KategoriOptionRefresh();
 
-            DurumOptionRefresh(null);
+            DurumOptionRefresh();
 
             GrupOptionRefresh();
 
-            ProjeOptionRefresh(null);
+            ProjeOptionRefresh();
 
         }
 
@@ -31,62 +31,36 @@ namespace OdevTakip.Models
 
         }
 
-        public static void KategoriOptionRefresh(List<AdEntity> kategoriList)
+        public static void KategoriOptionRefresh()
         {
-            if (kategoriList == null)
-            {
-                kategoriList = sGenericRepository.Select<AdEntity>("select * from public.kategori where sil=false");
-            }
 
-            kategoriOptionString = "";
+            entityRefinedAbstraction = new EntityRefinedAbstraction(new KategoriEntity());
+            kategoriOptionString = entityRefinedAbstraction.Select();
 
-            foreach (AdEntity item in kategoriList)
-            {
-                kategoriOptionString += $"<option value='{item.id}'>{item.ad}</option>";
-            }
         }
 
-        public static void DurumOptionRefresh(List<AdEntity> durumList)
+        public static void DurumOptionRefresh()
         {
-            if (durumList == null)
-            {
-                durumList = sGenericRepository.Select<AdEntity>("select * from public.durum where sil=false");
-            }
 
-            durumOptionString = "";
+            entityRefinedAbstraction = new EntityRefinedAbstraction(new DurumEntity());
+            durumOptionString = entityRefinedAbstraction.Select();
 
-            foreach (AdEntity item in durumList)
-            {
-                durumOptionString += $"<option value='{item.id}'>{item.ad}</option>";
-            }
         }
 
 
-        public static void ProjeOptionRefresh(List<AdEntity> projeList)
+        public static void ProjeOptionRefresh()
         {
-            if (projeList == null)
-            {
-                projeList = sGenericRepository.Select<AdEntity>("select * from public.proje where sil=false");
-            }
 
-            projeOptionString = "";
+            entityRefinedAbstraction = new EntityRefinedAbstraction(new ProjeEntity());
+            projeOptionString = entityRefinedAbstraction.Select();
 
-            foreach (AdEntity item in projeList)
-            {
-                projeOptionString += $"<option value='{item.id}'>{item.ad}</option>";
-            }
         }
 
         public static void GrupOptionRefresh()
         {
-            grupOptionString = "";
 
-            List<AdEntity> grupList = sGenericRepository.Select<AdEntity>("select * from public.grup where sil=false");
-
-            foreach (AdEntity item in grupList)
-            {
-                grupOptionString += $"<option value='{item.id}'>{item.ad}</option>";
-            }
+            entityRefinedAbstraction = new EntityRefinedAbstraction(new GrupEntity());
+            grupOptionString = entityRefinedAbstraction.Select();
 
         }
 

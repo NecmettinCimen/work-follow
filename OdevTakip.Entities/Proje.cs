@@ -4,6 +4,7 @@ namespace OdevTakip.Entities
 {
     public class Proje:BaseEntity
     {
+
         public string ad { get; set; }
         public string aciklama { get; set; }
         public int durumid { get; set; }

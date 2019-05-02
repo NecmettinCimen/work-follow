@@ -42,6 +42,10 @@ namespace OdevTakip.Controllers
 
         public class NotesDto
         {
+            public NotesDto()
+            {
+                this.notList = new List<TblNot>();
+            }
             public Etkinlik etkinlik { get; set; }
             public List<TblNot> notList { get; set; }
         }

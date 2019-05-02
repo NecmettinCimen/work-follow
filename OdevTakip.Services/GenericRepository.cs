@@ -46,7 +46,7 @@ namespace OdevTakip.Services
 
                 return true;
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }
@@ -66,7 +66,7 @@ namespace OdevTakip.Services
                     return npgsqlConnection.QueryFirst<T>(sql, model);
                 }
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }
@@ -88,7 +88,7 @@ namespace OdevTakip.Services
 
                 return true;
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }
@@ -108,12 +108,12 @@ namespace OdevTakip.Services
 
                     sql += " RETURNING Id";
 
-                    id =  npgsqlConnection.QueryFirst<int>(sql, model);
+                    id = npgsqlConnection.QueryFirst<int>(sql, model);
                 }
 
                 return id;
             }
-            catch (Exception)
+            catch
             {
                 return 0;
             }
@@ -133,7 +133,7 @@ namespace OdevTakip.Services
                     return npgsqlConnection.Query(sql, model);
                 }
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }
@@ -153,7 +153,7 @@ namespace OdevTakip.Services
                     return npgsqlConnection.Query<TList>(sql, model).ToList();
                 }
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }
@@ -175,19 +175,19 @@ namespace OdevTakip.Services
 
                 return true;
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }
         }
     }
 
-    public class SGenericRepository
+    public static class SGenericRepository
     {
         private static readonly string connectionString =
             "User ID=postgres;Password=localpass;Host=localhost;Port=5432;Database=dbodevtakip;";
 
-        public List<TList> Select<TList>(string sql, object model = null) where TList : class
+        public static List<dynamic> Select(string sql, object model = null)
         {
             try
             {
@@ -198,14 +198,15 @@ namespace OdevTakip.Services
                         npgsqlConnection.Open();
                     }
 
-                    return npgsqlConnection.Query<TList>(sql, model).ToList();
+                    return npgsqlConnection.Query(sql, model).ToList();
                 }
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }
         }
+
 
     }
 }
