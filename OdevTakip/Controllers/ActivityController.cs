@@ -96,9 +96,6 @@ namespace OdevTakip.Controllers
         public IActionResult Upload(UploadDto model)
         {
             int kullaniciId = HttpContext.Session.GetInt32("kullaniciid").Value;
-            string etkinlikid = Request.Path;
-            List<IFormFile> files = Request.Form.Files.ToList();
-            long size = files.Sum(f => f.Length);
 
             var filePath = _env.WebRootPath + "//files//";
 
@@ -174,7 +171,7 @@ namespace OdevTakip.Controllers
                 _kullaniciNotService.Update(model);
             }
 
-            return Redirect("/Activity/Detail/" + etkinlikId);
+            return Redirect("/Activity/Notes/" + etkinlikId);
         }
 
 
