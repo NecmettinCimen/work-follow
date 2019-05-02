@@ -1,4 +1,4 @@
-﻿@model OdevTakip.Controllers.ProjectController.ProjectIndexDto
+﻿@model OdevTakip.Models.GenericIndexDto<OdevTakip.Entities.Proje>
 @{
     ViewData["Title"] = "Home Page";
     string error = ViewData["success"] as string;
@@ -81,7 +81,7 @@
                         <!--end of content list head-->
                         <div class="content-list-body row">
 
-                            @foreach (var proje in Model.projes)
+                            @foreach (var proje in Model.list)
                             {
                             <div class="col-lg-6">
                                 <div class="card card-project">

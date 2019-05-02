@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OdevTakip.Entities;
+using OdevTakip.Models;
 using OdevTakip.Services;
 using System.Collections.Generic;
 using System.IO;
@@ -29,7 +30,7 @@ namespace OdevTakip.Controllers
             _env = env;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sort)
         {
 
             List<Etkinlik> activityList = _etkinlikService.Select(new Etkinlik()
@@ -37,7 +38,7 @@ namespace OdevTakip.Controllers
                 Olusturankisi = HttpContext.Session.GetInt32("kullaniciid").Value
             });
 
-            return View(activityList);
+            return View(new GenericIndexDto<Etkinlik>(activityList, sort));
         }
 
         public class NotesDto

@@ -18,53 +18,13 @@ namespace OdevTakip.Controllers
             _etkinlikService = etkinlikService;
         }
 
-        public class ProjectIndexDto
-        {
-            public ProjectIndexDto()
-            {
-                projes = new List<Proje>();
-            }
-            public string sort { get; set; }
-            public List<Proje> projes { get; set; }
-
-            public string SortSelect()
-            {
-                if (sort == "Id")
-                {
-                    return "Date";
-                }
-                else
-                {
-                    return "Id";
-                }
-            }
-        }
 
         public IActionResult Index(string sort)
         {
             int sessionKisiId = HttpContext.Session.GetInt32("kullaniciid").Value;
             List<Proje> projes = _projeService.Select(new Proje() { Olusturankisi = sessionKisiId });
 
-            SortedList sortedList = new SortedList();
-
-            switch (sort)
-            {
-                case "Id":
-                    sortedList.SetSortStrategy(new IdSort());
-                    break;
-                default:
-                case "Date":
-                    sortedList.SetSortStrategy(new DateSort());
-                    break;
-            }
-
-            projes = sortedList.Sort<Proje>(projes);
-
-            return View(new ProjectIndexDto
-            {
-                projes = projes,
-                sort = sort != null ? sort : "Id"
-            });
+            return View(new GenericIndexDto<Proje>(projes, sort));
         }
         public class ActivityDto
         {

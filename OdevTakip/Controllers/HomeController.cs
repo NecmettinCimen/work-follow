@@ -17,12 +17,12 @@ namespace OdevTakip.Controllers
             _grupService = grupService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sort)
         {
             int sessionKisiId = HttpContext.Session.GetInt32("kullaniciid").Value;
             List<Grup> grupListesi = _grupService.Select(new Grup() { Olusturankisi = sessionKisiId });
 
-            return View(grupListesi);
+            return View(new GenericIndexDto<Grup>(grupListesi, sort));
         }
 
         public IActionResult Privacy()

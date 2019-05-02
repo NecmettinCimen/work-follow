@@ -1,4 +1,4 @@
-﻿@model List<OdevTakip.Entities.Etkinlik>
+﻿@model OdevTakip.Models.GenericIndexDto<OdevTakip.Entities.Etkinlik>
 @{
     ViewData["Title"] = "Home Page";
     string error = ViewData["success"] as string;
@@ -65,6 +65,9 @@
                                 </button>
                             </div>
                             <form class="col-md-auto">
+                                <a title="@Model.sort" href="/Activity/Index?sort=@Model.SortSelect()" class="btn btn-round">
+                                    <i class="material-icons">sort</i>
+                                </a>
                                 <div class="input-group input-group-round">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
@@ -78,7 +81,7 @@
                         <!--end of content list head-->
                         <div class="content-list-body row">
 
-                            @foreach (var etkinlik in Model)
+                            @foreach (var etkinlik in Model.list)
                             {
 
                                 <div class="col-12">
