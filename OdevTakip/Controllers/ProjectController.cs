@@ -18,6 +18,28 @@ namespace OdevTakip.Controllers
             _etkinlikService = etkinlikService;
         }
 
+        public class ProjectIndexDto
+        {
+            public ProjectIndexDto()
+            {
+                projes = new List<Proje>();
+            }
+            public string sort { get; set; }
+            public List<Proje> projes { get; set; }
+
+            public string SortSelect()
+            {
+                if (sort == "Id")
+                {
+                    return "Date";
+                }
+                else
+                {
+                    return "Id";
+                }
+            }
+        }
+
         public IActionResult Index(string sort)
         {
             int sessionKisiId = HttpContext.Session.GetInt32("kullaniciid").Value;
@@ -32,13 +54,17 @@ namespace OdevTakip.Controllers
                     break;
                 default:
                 case "Date":
-                    sortedList.SetSortStrategy(new IdSort());
+                    sortedList.SetSortStrategy(new DateSort());
                     break;
             }
 
             projes = sortedList.Sort<Proje>(projes);
 
-            return View(projes);
+            return View(new ProjectIndexDto
+            {
+                projes = projes,
+                sort = sort != null ? sort : "Id"
+            });
         }
         public class ActivityDto
         {
@@ -77,7 +103,9 @@ namespace OdevTakip.Controllers
             bool result = _projeService.Insert(model);
 
             if (result)
+            {
                 GenericModels.ProjeOptionRefresh();
+            }
 
             return Redirect("/Project/Index");
         }
