@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OdevTakip.Entities;
+using OdevTakip.Filters;
 using OdevTakip.Models;
 using OdevTakip.Services;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace OdevTakip.Controllers
 {
+    [CustomAuthorizeAttribute]
     public class ActivityController : Controller
     {
         private readonly IEtkinlikService _etkinlikService;
@@ -106,6 +108,10 @@ namespace OdevTakip.Controllers
 
             if (model.file.Length > 0)
             {
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
                 using (var stream = new FileStream(filePath + model.file.FileName, FileMode.Create))
                 {
                     model.file.CopyTo(stream);

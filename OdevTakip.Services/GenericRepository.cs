@@ -1,14 +1,17 @@
 ﻿using Dapper;
 using Npgsql;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Win32.SafeHandles;
+using System;
+using System.Runtime.InteropServices;
 
 namespace OdevTakip.Services
 {
     public interface IGenericRepository
     {
         bool Insert(string sql, object model = null);
+
         int InsertAndGetId(string sql, object model = null);
 
         IEnumerable<dynamic> Select(string sql, object model = null);
@@ -22,27 +25,51 @@ namespace OdevTakip.Services
         bool Update(string sql, object model);
     }
 
+    static class CustomNpgsqlConnection
+    {
+        private static readonly string connectionString =
+            "User ID=postgres;Password=localpass;Host=localhost;Port=5432;Database=dbodevtakip;";
+
+        static NpgsqlConnection _npgsqlConnection;
+        //proxy
+        public static NpgsqlConnection npgsqlConnection
+        {
+            get
+            {
+                if (_npgsqlConnection == null)
+                {
+                    _npgsqlConnection = new NpgsqlConnection(connectionString);
+                    _npgsqlConnection.Open();
+                }
+
+                return _npgsqlConnection;
+            }
+        }
+
+    }
+
     /// <summary>
     /// Database üzerinde tüm işlemleri yapmamızı sağlar
     /// </summary>
     public class GenericRepository : IGenericRepository
     {
-        private static readonly string connectionString =
-            "User ID=postgres;Password=localpass;Host=localhost;Port=5432;Database=dbodevtakip;";
+
+
+        public void BeginTransaction()
+        {
+            CustomNpgsqlConnection.npgsqlConnection.Execute("BEGIN TRANSACTION;");
+        }
+
+        public void RollBackTransaction()
+        {
+            CustomNpgsqlConnection.npgsqlConnection.Execute("ROLLBACK;");
+        }
 
         public bool Delete(string sql, object model)
         {
             try
             {
-                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
-                {
-                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
-                    {
-                        npgsqlConnection.Open();
-                    }
-
-                    npgsqlConnection.Execute(sql, model);
-                }
+                CustomNpgsqlConnection.npgsqlConnection.Execute(sql, model);
 
                 return true;
             }
@@ -56,15 +83,8 @@ namespace OdevTakip.Services
         {
             try
             {
-                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
-                {
-                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
-                    {
-                        npgsqlConnection.Open();
-                    }
 
-                    return npgsqlConnection.QueryFirst<T>(sql, model);
-                }
+                return CustomNpgsqlConnection.npgsqlConnection.QueryFirst<T>(sql, model);
             }
             catch
             {
@@ -76,15 +96,8 @@ namespace OdevTakip.Services
         {
             try
             {
-                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
-                {
-                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
-                    {
-                        npgsqlConnection.Open();
-                    }
 
-                    npgsqlConnection.Execute(sql, model);
-                }
+                CustomNpgsqlConnection.npgsqlConnection.Execute(sql, model);
 
                 return true;
             }
@@ -99,17 +112,10 @@ namespace OdevTakip.Services
             try
             {
                 int id = 0;
-                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
-                {
-                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
-                    {
-                        npgsqlConnection.Open();
-                    }
 
-                    sql += " RETURNING Id";
+                sql += " RETURNING Id";
 
-                    id = npgsqlConnection.QueryFirst<int>(sql, model);
-                }
+                id = CustomNpgsqlConnection.npgsqlConnection.QueryFirst<int>(sql, model);
 
                 return id;
             }
@@ -123,15 +129,8 @@ namespace OdevTakip.Services
         {
             try
             {
-                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
-                {
-                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
-                    {
-                        npgsqlConnection.Open();
-                    }
 
-                    return npgsqlConnection.Query(sql, model);
-                }
+                return CustomNpgsqlConnection.npgsqlConnection.Query(sql, model);
             }
             catch
             {
@@ -143,15 +142,7 @@ namespace OdevTakip.Services
         {
             try
             {
-                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
-                {
-                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
-                    {
-                        npgsqlConnection.Open();
-                    }
-
-                    return npgsqlConnection.Query<TList>(sql, model).ToList();
-                }
+                return CustomNpgsqlConnection.npgsqlConnection.Query<TList>(sql, model).ToList();
             }
             catch
             {
@@ -163,15 +154,7 @@ namespace OdevTakip.Services
         {
             try
             {
-                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
-                {
-                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
-                    {
-                        npgsqlConnection.Open();
-                    }
-
-                    npgsqlConnection.Execute(sql, model);
-                }
+                CustomNpgsqlConnection.npgsqlConnection.Execute(sql, model);
 
                 return true;
             }
@@ -180,6 +163,7 @@ namespace OdevTakip.Services
                 return false;
             }
         }
+
     }
 
     public static class SGenericRepository
@@ -191,15 +175,7 @@ namespace OdevTakip.Services
         {
             try
             {
-                using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString))
-                {
-                    if (npgsqlConnection.State != System.Data.ConnectionState.Open)
-                    {
-                        npgsqlConnection.Open();
-                    }
-
-                    return npgsqlConnection.Query(sql, model).ToList();
-                }
+                return CustomNpgsqlConnection.npgsqlConnection.Query(sql, model).ToList();
             }
             catch
             {

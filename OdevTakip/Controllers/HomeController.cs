@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OdevTakip.Entities;
+using OdevTakip.Filters;
 using OdevTakip.Models;
 using OdevTakip.Services;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Diagnostics;
 
 namespace OdevTakip.Controllers
 {
+    [CustomAuthorizeAttribute]
     public class HomeController : Controller
     {
         private readonly IGrupService _grupService;

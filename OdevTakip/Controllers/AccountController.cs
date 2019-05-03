@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OdevTakip.Entities;
+using OdevTakip.Filters;
 using OdevTakip.Services;
 
 namespace OdevTakip.Controllers
@@ -14,9 +15,10 @@ namespace OdevTakip.Controllers
             _kullaniciService = kullaniciService;
         }
 
+        [CustomAuthorizeAttribute]
         public IActionResult Index()
         {
-            return View("Login");
+            return View();
         }
 
         public IActionResult Login()
@@ -70,6 +72,7 @@ namespace OdevTakip.Controllers
             }
         }
 
+        [CustomAuthorizeAttribute]
         public ActionResult Logout()
         {
             HttpContext.Session.Clear();

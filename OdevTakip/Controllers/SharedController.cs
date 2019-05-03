@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OdevTakip.Entities;
+using OdevTakip.Filters;
 using OdevTakip.Models;
 using OdevTakip.Services;
 using System;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 
 namespace OdevTakip.Controllers
 {
+    [CustomAuthorizeAttribute]
     public class SharedController : Controller
     {
         private readonly IGenericRepository _genericRepository;

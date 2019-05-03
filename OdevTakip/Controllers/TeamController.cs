@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OdevTakip.Entities;
+using OdevTakip.Filters;
 using OdevTakip.Models;
 using OdevTakip.Services;
 
 namespace OdevTakip.Controllers
 {
+    [CustomAuthorizeAttribute]
     public class TeamController : Controller
     {
         private readonly IGrupService _grupService;
