@@ -149,7 +149,7 @@ else
                                 <h6>General Details</h6>
                                 <div class="form-group row align-items-center">
                                     <label class="col-3">Title</label>
-                                    <input class="form-control col" type="text" placeholder="Title" name="baslik" id="project-add-modal_ad">
+                                    <input class="form-control col" type="text" placeholder="Title" name="baslik" id="project-add-modal_ad" required>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-3">Description</label>
@@ -159,11 +159,11 @@ else
                                 <h6>Timeline</h6>
                                 <div class="form-group row align-items-center">
                                     <label class="col-3">Start Date</label>
-                                    <input class="form-control col" type="date" name="baslangictarihi" id="project-add-modal_baslangictarihi">
+                                    <input class="form-control col" type="date" name="baslangictarihi" id="project-add-modal_baslangictarihi" required>
                                 </div>
                                 <div class="form-group row align-items-center">
                                     <label class="col-3">Due Date</label>
-                                    <input class="form-control col" type="date" name="bitistarihi" id="project-add-modal_bitistarihi">
+                                    <input class="form-control col" type="date" name="bitistarihi" id="project-add-modal_bitistarihi" required>
                                 </div>
                                 <div class="alert alert-warning text-small" role="alert">
                                     <span>You can change due dates at any time.</span>
@@ -173,7 +173,7 @@ else
                                 <div class="form-group row align-items-center">
                                     <label class="col-3">Category</label>
                                     <div class="col-7">
-                                        <select class="form-control" name="kategoriid" id="project-add-modal_kategoriid">
+                                        <select class="form-control" name="kategoriid" id="project-add-modal_kategoriid" required>
                                             @Html.Raw(GenericModels.kategoriOptionString)
                                         </select>
                                     </div>
@@ -183,7 +183,7 @@ else
                                 <div class="form-group row align-items-center">
                                     <label class="col-3">Status</label>
                                     <div class="col-7">
-                                        <select class="form-control col" name="durumid" id="project-add-modal_durumid">
+                                        <select class="form-control col" name="durumid" id="project-add-modal_durumid" required>
                                             @Html.Raw(GenericModels.durumOptionString)
                                         </select>
                                     </div>
