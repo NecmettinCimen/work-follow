@@ -55,8 +55,8 @@ namespace OdevTakip
             //ilk atamaları yapabilmek için
             GenericModels.Nesne();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddMvc(options=>options.EnableEndpointRouting=false);
+services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
         }
 

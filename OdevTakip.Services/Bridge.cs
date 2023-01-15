@@ -69,6 +69,7 @@ namespace OdevTakip.Services
 
         public override string Select()
         {
+            if(adEntity.ad == null) return string.Empty;
             List<string> adEntitys = SGenericRepository.Select("select * from public." + adEntity.ToString() + " where sil=false")
                 .Select(item => $"<option value='{item.id}'>{item.ad}</option>").ToList();
 
