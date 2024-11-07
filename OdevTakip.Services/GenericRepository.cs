@@ -28,7 +28,7 @@ namespace OdevTakip.Services
     static class CustomNpgsqlConnection
     {
         private static readonly string connectionString =
-            "User ID=postgres;Password=localpass;Host=localhost;Port=5432;Database=dbodevtakip;";
+            "User ID=username;Password=password;Host=localhost;Port=5432;Database=workfollow;";
 
         static NpgsqlConnection _npgsqlConnection;
         //proxy

@@ -18,6 +18,8 @@
     <a href="https://github.com/necmettincimen/OdevTakip"><strong>Explore the docs »</strong></a>
     <br />
     <br />
+    <a href="https://work-follow.necmettincimen.xyz/Account/Login">View Demo</a>
+    ·
     <a href="https://github.com/necmettincimen/OdevTakip/issues">Report Bug</a>
     ·
     <a href="https://github.com/necmettincimen/OdevTakip/issues">Request Feature</a>

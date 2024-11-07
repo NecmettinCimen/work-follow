@@ -1,0 +1,17 @@
+version: '1.0'
+
+services:
+  cmsapi:
+    container_name: work-follow
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - 8084:80
+
+networks:
+  default:
+      name: srvnecmettin
