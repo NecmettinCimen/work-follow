@@ -1,19 +1,19 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build-env
 WORKDIR /App
 ARG BUILD_NUMBER
 
 # Copy everything
-COPY ./OdevTakip/ ./OdevTakip/
-COPY ./OdevTakip.Entities/ ./OdevTakip.Entities/
-COPY ./OdevTakip.Services/ ./OdevTakip.Services/
+COPY ./WorkFollow.Web/ ./WorkFollow.Web/
+COPY ./WorkFollow.Entities/ ./WorkFollow.Entities/
+COPY ./WorkFollow.Services/ ./WorkFollow.Services/
 
 # Build and publish a release
-RUN dotnet publish ./OdevTakip/OdevTakip.csproj -c Release -o out
+RUN dotnet publish ./WorkFollow.Web/WorkFollow.Web.csproj -c Release -o out
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /App
 COPY --from=build-env /App/out .
 
-ENTRYPOINT ["dotnet", "OdevTakip.dll"]
+ENTRYPOINT ["dotnet", "WorkFollow.Web.dll"]
 

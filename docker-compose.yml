@@ -8,9 +8,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     environment:
-      - ASPNETCORE_URLS=http://+:80
-    ports:
-      - 8084:80
+      - ASPNETCORE_URLS=http://+:5000
 
 networks:
   default:
