@@ -1,4 +1,4 @@
-﻿using OdevTakip.Entities;
+﻿using WorkFollow.Entities;
 
 namespace OdevTakip.Services
 {

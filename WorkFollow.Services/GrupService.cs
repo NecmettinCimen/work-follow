@@ -1,4 +1,4 @@
-﻿using OdevTakip.Entities;
+﻿using WorkFollow.Entities;
 using System.Collections.Generic;
 
 namespace OdevTakip.Services

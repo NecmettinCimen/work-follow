@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OdevTakip.Entities\OdevTakip.Entities.csproj" />
+    <ProjectReference Include="..\WorkFollow.Entities\WorkFollow.Entities.csproj" />
   </ItemGroup>
 
 </Project>

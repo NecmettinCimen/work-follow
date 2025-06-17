@@ -1,5 +1,5 @@
-﻿using OdevTakip.Entities;
-using OdevTakip.Services;
+﻿using WorkFollow.Web.Entities;
+using WorkFollow.Web.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
