@@ -8,66 +8,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A project management Bootstrap theme by Medium Rare">
     <link href="~/assets/img/favicon.ico" rel="icon" type="image/x-icon">
-    <link href="~/lib/dropzone/dropzone.min.css" rel="stylesheet" />
-    <link href="~/css/icon.css" rel="stylesheet" />
-    <link href="~/css/css.css" rel="stylesheet" />
+    <link href="~/lib/dropzone/dropzone.min.css" rel="stylesheet"/>
+    <link href="~/css/icon.css" rel="stylesheet"/>
+    <link href="~/css/css.css" rel="stylesheet"/>
     <link href="~/assets/css/theme.css" rel="stylesheet" type="text/css" media="all">
-    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet"/>
 </head>
 
 <body>
 
-    <span style="display:none" id="firstName">@Context.Session.GetString("ad")</span>
-    <span style="display:none" id="lastName">@Context.Session.GetString("soyad")</span>
+<span style="display:none" id="firstName">@Context.Session.GetString("ad")</span>
+<span style="display:none" id="lastName">@Context.Session.GetString("soyad")</span>
 
-    <div class="layout layout-nav-side">
-        <div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
-            <a class="navbar-brand" href="#">
-                <img alt="Pipeline" src="\assets\img\logo.svg">
-            </a>
-            <div class="d-flex align-items-center">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="d-block d-lg-none ml-2">
-                    <div class="dropdown">
-                        <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img alt="Image" src="\assets\img\avatar-male-4.jpeg" class="avatar">
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="nav-side-user.html" class="dropdown-item">Profile</a>
-                            <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
-                            <a href="/Account/Logout" class="dropdown-item">Log Out</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="collapse navbar-collapse flex-column" id="navbar-collapse">
-
-                <div class="d-none d-lg-block w-100">
-                    <span class="text-small text-muted">Quick Links</span>
-                    <ul class="nav nav-small flex-column mt-2">
-                        <li class="nav-item">
-                            <a href="/Home/Index" class="nav-link">Team Overview</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/Project/Index" class="nav-link">Project</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/Activity/Index" class="nav-link">Tasks</a>
-                        </li>
-
-                    </ul>
-                    <hr>
-                </div>
-
-            </div>
-            <div class="d-none d-lg-block">
-                <div class="dropup">
-                    <a class="profileImage" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
+<div class="layout layout-nav-side">
+    <div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
+        <a class="navbar-brand" href="#">
+            <img alt="Pipeline" src="\assets\img\logo.svg">
+        </a>
+        <div class="d-flex align-items-center">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
+                    aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="d-block d-lg-none ml-2">
+                <div class="dropdown">
+                    <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img alt="Image" src="\assets\img\avatar-male-4.jpeg" class="avatar">
                     </a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu dropdown-menu-right">
                         <a href="nav-side-user.html" class="dropdown-item">Profile</a>
                         <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
                         <a href="/Account/Logout" class="dropdown-item">Log Out</a>
@@ -75,29 +43,63 @@
                 </div>
             </div>
         </div>
+        <div class="collapse navbar-collapse flex-column" id="navbar-collapse">
 
-        @RenderBody()
+            <div class="d-none d-lg-block w-100">
+                <span class="text-small text-muted">Quick Links</span>
+                <ul class="nav nav-small flex-column mt-2">
+                    <li class="nav-item">
+                        <a href="/Home/Index" class="nav-link">Team Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Project/Index" class="nav-link">Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Activity/Index" class="nav-link">Tasks</a>
+                    </li>
 
+                </ul>
+                <hr>
+            </div>
+
+        </div>
+        <div class="d-none d-lg-block">
+            <div class="dropup">
+                <a class="profileImage" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+
+                </a>
+                <div class="dropdown-menu">
+                    <a href="nav-side-user.html" class="dropdown-item">Profile</a>
+                    <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
+                    <a href="/Account/Logout" class="dropdown-item">Log Out</a>
+                </div>
+            </div>
+        </div>
     </div>
 
+    @RenderBody()
 
-    <script asp-append-version="true" src="~/js/jquery-3.2.1.min.js"></script>
-    <script asp-append-version="true" src="~/js/autosize.min.js"></script>
-    <script asp-append-version="true" src="~/js/popper.min.js"></script>
-    <script asp-append-version="true" src="~/js/prism.min.js"></script>
-    <script asp-append-version="true" src="~/js/draggable.bundle.legacy.js"></script>
-    <script asp-append-version="true" src="~/js/swap-animation.js"></script>
-    <script asp-append-version="true" src="~/js/dropzone.min.js"></script>
-    <script asp-append-version="true" src="~/js/list.min.js"></script>
-    <script asp-append-version="true" src="~/js/bootstrap.min.js"></script>
-    <script asp-append-version="true" src="~/assets/js/theme.js"></script>
-    <script asp-append-version="true" src="~/js/sweetalert2.js"></script>
-    <script asp-append-version="true" src="~/lib/dropzone/dropzone.min.js"></script>
-    <script asp-append-version="true" src="~/js/site.js"></script>
+</div>
 
-    <link href="~/css/login.css" rel="stylesheet" />
 
-    @RenderSection("Scripts", required: false)
+<script asp-append-version="true" src="~/js/jquery-3.2.1.min.js"></script>
+<script asp-append-version="true" src="~/js/autosize.min.js"></script>
+<script asp-append-version="true" src="~/js/popper.min.js"></script>
+<script asp-append-version="true" src="~/js/prism.min.js"></script>
+<script asp-append-version="true" src="~/js/draggable.bundle.legacy.js"></script>
+<script asp-append-version="true" src="~/js/swap-animation.js"></script>
+<script asp-append-version="true" src="~/js/dropzone.min.js"></script>
+<script asp-append-version="true" src="~/js/list.min.js"></script>
+<script asp-append-version="true" src="~/js/bootstrap.min.js"></script>
+<script asp-append-version="true" src="~/assets/js/theme.js"></script>
+<script asp-append-version="true" src="~/js/sweetalert2.js"></script>
+<script asp-append-version="true" src="~/lib/dropzone/dropzone.min.js"></script>
+<script asp-append-version="true" src="~/js/site.js"></script>
+
+<link href="~/css/login.css" rel="stylesheet"/>
+
+@RenderSection("Scripts", false)
 
 </body>
 

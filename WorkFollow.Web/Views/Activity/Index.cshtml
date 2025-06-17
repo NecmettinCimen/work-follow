@@ -1,7 +1,7 @@
-﻿@model OdevTakip.Models.GenericIndexDto<OdevTakip.Entities.Etkinlik>
+﻿@model GenericIndexDto<WorkFollow.Entities.Etkinlik>
 @{
     ViewData["Title"] = "Home Page";
-    string error = ViewData["success"] as string;
+    var error = ViewData["success"] as string;
 }
 
 
@@ -41,7 +41,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-11 col-xl-10">
                 <div class="page-header mb-1">
-                    
+
                 </div>
 
                 <ul class="nav nav-tabs nav-fill">
@@ -52,11 +52,13 @@
                         <a class="nav-link" href="/Project/Index">Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">Tasks</a>
+                        <a class="nav-link active" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks"
+                           aria-selected="false">Tasks</a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="teams" role="tabpanel" aria-labelledby="teams-tab" data-filter-list="content-list-body">
+                    <div class="tab-pane fade show active" id="teams" role="tabpanel" aria-labelledby="teams-tab"
+                         data-filter-list="content-list-body">
                         <div class="row content-list-head">
                             <div class="col-auto">
                                 <h3>Tasks</h3>
@@ -65,7 +67,8 @@
                                 </button>
                             </div>
                             <form class="col-md-auto">
-                                <a title="@Model.sort" href="/Activity/Index?sort=@Model.SortSelect()" class="btn btn-round">
+                                <a title="@Model.sort" href="/Activity/Index?sort=@Model.SortSelect()"
+                                   class="btn btn-round">
                                     <i class="material-icons">sort</i>
                                 </a>
                                 <div class="input-group input-group-round">
@@ -74,7 +77,9 @@
                                             <i class="material-icons">filter_list</i>
                                         </span>
                                     </div>
-                                    <input type="search" class="form-control filter-list-input" placeholder="Filter teams" aria-label="Filter teams" aria-describedby="filter-teams">
+                                    <input type="search" class="form-control filter-list-input"
+                                           placeholder="Filter teams" aria-label="Filter teams"
+                                           aria-describedby="filter-teams">
                                 </div>
                             </form>
                         </div>
@@ -83,11 +88,11 @@
 
                             @foreach (var etkinlik in Model.list)
                             {
-
                                 <div class="col-12">
                                     <div class="card card-task">
                                         <div class="progress">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 100%"
+                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <div class="card-body">
                                             <div class="card-title">
@@ -97,19 +102,24 @@
                                                 <span class="text-small">@etkinlik.bitistarihi.ToLongDateString()</span>
                                             </div>
                                             <div class="card-meta">
-                                                
+
                                                 <div class="d-flex align-items-center">
                                                     <i class="material-icons">playlist_add_check</i>
-                                                    
+
                                                 </div>
                                                 <div class="dropdown card-options">
-                                                    <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <button class="btn-options" type="button"
+                                                            id="task-dropdown-button-1" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">
                                                         <i class="material-icons">more_vert</i>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a class="dropdown-item" href="#">Mark as done</a>
                                                         <div class="dropdown-divider"></div>
-                                                        <button type="button" class="dropdown-item text-danger" onclick="deleteAnyItem('/Activity/ActivityDelete', @etkinlik.Id)">Delete</button>
+                                                        <button type="button" class="dropdown-item text-danger"
+                                                                onclick="deleteAnyItem('/Activity/ActivityDelete', @etkinlik.Id)">
+                                                            Delete
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,7 +140,8 @@
         </div>
     </div>
 
-    <form class="modal fade" action="/Activity/ActivitySave" method="post" id="project-add-modal" tabindex="-1" role="dialog" aria-labelledby="project-add-modal" aria-hidden="true">
+    <form class="modal fade" action="/Activity/ActivitySave" method="post" id="project-add-modal" tabindex="-1"
+          role="dialog" aria-labelledby="project-add-modal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -141,25 +152,30 @@
                 </div>
                 <div class="modal-body">
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="project-add-details" role="tabpanel" aria-labelledby="project-add-details-tab">
+                        <div class="tab-pane fade show active" id="project-add-details" role="tabpanel"
+                             aria-labelledby="project-add-details-tab">
                             <h6>General Details</h6>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Title</label>
-                                <input class="form-control col" type="text" placeholder="Title" name="baslik" id="project-add-modal_ad" required>
+                                <input class="form-control col" type="text" placeholder="Title" name="baslik"
+                                       id="project-add-modal_ad" required>
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Description</label>
-                                <textarea class="form-control col" rows="3" placeholder="Description" name="aciklama" id="project-add-modal_aciklama"></textarea>
+                                <textarea class="form-control col" rows="3" placeholder="Description" name="aciklama"
+                                          id="project-add-modal_aciklama"></textarea>
                             </div>
                             <hr>
                             <h6>Timeline</h6>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Start Date</label>
-                                <input class="form-control col" type="date" name="baslangictarihi" id="project-add-modal_baslangictarihi" required>
+                                <input class="form-control col" type="date" name="baslangictarihi"
+                                       id="project-add-modal_baslangictarihi" required>
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Due Date</label>
-                                <input class="form-control col" type="date" name="bitistarihi" id="project-add-modal_bitistarihi" required>
+                                <input class="form-control col" type="date" name="bitistarihi"
+                                       id="project-add-modal_bitistarihi" required>
                             </div>
                             <div class="alert alert-warning text-small" role="alert">
                                 <span>You can change due dates at any time.</span>
@@ -169,33 +185,42 @@
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Category</label>
                                 <div class="col-7">
-                                    <select class="form-control" name="kategoriid" id="project-add-modal_kategoriid" required>
+                                    <select class="form-control" name="kategoriid" id="project-add-modal_kategoriid"
+                                            required>
                                         @Html.Raw(GenericModels.kategoriOptionString)
                                     </select>
                                 </div>
-                                <button type="button" class="btn btn-primary col-2" onclick="SharedAdd(this)" data-type="kategori" data-name="kategoriid" data-title="Category" data-modal="project-add-modal">Add</button>
+                                <button type="button" class="btn btn-primary col-2" onclick="SharedAdd(this)"
+                                        data-type="kategori" data-name="kategoriid" data-title="Category"
+                                        data-modal="project-add-modal">Add
+                                </button>
 
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Status</label>
                                 <div class="col-7">
-                                    <select class="form-control col" name="durumid" id="project-add-modal_durumid" required>
+                                    <select class="form-control col" name="durumid" id="project-add-modal_durumid"
+                                            required>
                                         @Html.Raw(GenericModels.durumOptionString)
                                     </select>
                                 </div>
-                                <button type="button" class="btn btn-primary col-2" onclick="SharedAdd(this)" data-type="durum" data-name="durumid" data-title="Status" data-modal="project-add-modal" >Add</button>
+                                <button type="button" class="btn btn-primary col-2" onclick="SharedAdd(this)"
+                                        data-type="durum" data-name="durumid" data-title="Status"
+                                        data-modal="project-add-modal">Add
+                                </button>
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Project</label>
                                 <div class="col-7">
-                                    <select class="form-control col" name="projeid" id="project-add-modal_projeid" required>
+                                    <select class="form-control col" name="projeid" id="project-add-modal_projeid"
+                                            required>
                                         @Html.Raw(GenericModels.projeOptionString)
                                     </select>
                                 </div>
                                 <a href="/Project/Index" class="btn btn-primary col-2">Add</a>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <!--end of modal body-->

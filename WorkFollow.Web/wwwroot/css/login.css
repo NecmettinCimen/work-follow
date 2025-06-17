@@ -11,13 +11,13 @@
     z-index: 999;
 }
 
-    .layout-switcher:not(:hover) {
-        opacity: .95;
-    }
+.layout-switcher:not(:hover) {
+    opacity: .95;
+}
 
-    .layout-switcher:not(:focus) {
-        cursor: pointer;
-    }
+.layout-switcher:not(:focus) {
+    cursor: pointer;
+}
 
 .layout-switcher-head {
     font-size: .75rem;
@@ -25,10 +25,10 @@
     text-transform: uppercase;
 }
 
-    .layout-switcher-head i {
-        font-size: 1.25rem;
-        transition: all .35s ease;
-    }
+.layout-switcher-head i {
+    font-size: 1.25rem;
+    transition: all .35s ease;
+}
 
 .layout-switcher-body {
     transition: all .55s ease;
@@ -44,28 +44,28 @@
     transform: translateX(-50%) translateY(0);
 }
 
-    .layout-switcher:focus .layout-switcher-head i {
-        transform: rotateZ(180deg);
-        opacity: 0;
-    }
+.layout-switcher:focus .layout-switcher-head i {
+    transform: rotateZ(180deg);
+    opacity: 0;
+}
 
-    .layout-switcher:focus .layout-switcher-body {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.layout-switcher:focus .layout-switcher-body {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 .layout-switcher-option {
     width: 72px;
     padding: .25rem;
-    border: 2px solid rgba(255,255,255,0);
+    border: 2px solid rgba(255, 255, 255, 0);
     display: inline-block;
     border-radius: 4px;
     transition: all .35s ease;
 }
 
-    .layout-switcher-option.active {
-        border-color: #007bff;
-    }
+.layout-switcher-option.active {
+    border-color: #007bff;
+}
 
 .layout-switcher-icon {
     width: 100%;

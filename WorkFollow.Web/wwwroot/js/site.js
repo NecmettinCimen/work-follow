@@ -26,7 +26,7 @@ deleteAnyItem = (url, Id, successcallback) => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ Id })
+                body: JSON.stringify({Id})
             }).then(data => data.json()).then(result => {
                 if (result) {
                     Swal.fire({
@@ -47,14 +47,14 @@ deleteAnyItem = (url, Id, successcallback) => {
 };
 
 editAnyItem = (current) => {
-    const { id, url, form } = current.dataset;
+    const {id, url, form} = current.dataset;
 
     fetch(url, {
         method: 'post',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ Id: id })
+        body: JSON.stringify({Id: id})
     }).then(res => res.json()).then(res => {
         Object.keys(res).map(key => $('#' + form + '_' + key).val(res[key]));
 
@@ -66,7 +66,7 @@ searchHtml = (current) => {
     var filter, table, tr, td, i, txtValue;
     filter = current.value.toUpperCase();
 
-    const { tableid } = current.dataset;
+    const {tableid} = current.dataset;
 
     table = document.getElementById(tableid);
     tr = table.getElementsByClassName("searchDiv");
@@ -84,7 +84,7 @@ searchHtml = (current) => {
 };
 
 SharedAdd = (current) => {
-    const { type, name, modal, title } = current.dataset;
+    const {type, name, modal, title} = current.dataset;
 
     var modalForm = $('#' + modal);
     modalForm.modal('hide');
@@ -101,7 +101,7 @@ SharedAdd = (current) => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ Name: text, Type: type })
+                body: JSON.stringify({Name: text, Type: type})
             })
                 .then(response => {
                     if (!response.ok) {

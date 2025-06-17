@@ -1,188 +1,174 @@
-﻿using Dapper;
-using Npgsql;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Win32.SafeHandles;
-using System;
-using System.Runtime.InteropServices;
+using Dapper;
+using Npgsql;
 
-namespace OdevTakip.Services
+namespace WorkFollow.Services;
+
+public interface IGenericRepository
 {
-    public interface IGenericRepository
+    bool Insert(string sql, object model = null);
+
+    int InsertAndGetId(string sql, object model = null);
+
+    IEnumerable<dynamic> Select(string sql, object model = null);
+
+    T First<T>(string sql, object model) where T : class;
+
+    List<TList> Select<TList>(string sql, object model = null) where TList : class;
+
+    bool Delete(string sql, object model);
+
+    bool Update(string sql, object model);
+}
+
+internal static class CustomNpgsqlConnection
+{
+    private static readonly string connectionString =
+        "User ID=postgres;Password=localpass;Host=localhost;Port=5432;Database=dbodevtakip;";
+
+    private static NpgsqlConnection _npgsqlConnection;
+
+    //proxy
+    public static NpgsqlConnection npgsqlConnection
     {
-        bool Insert(string sql, object model = null);
+        get
+        {
+            if (_npgsqlConnection == null)
+            {
+                _npgsqlConnection = new NpgsqlConnection(connectionString);
+                _npgsqlConnection.Open();
+            }
 
-        int InsertAndGetId(string sql, object model = null);
+            return _npgsqlConnection;
+        }
+    }
+}
 
-        IEnumerable<dynamic> Select(string sql, object model = null);
+/// <summary>
+///     Database üzerinde tüm işlemleri yapmamızı sağlar
+/// </summary>
+public class GenericRepository : IGenericRepository
+{
+    public bool Delete(string sql, object model)
+    {
+        try
+        {
+            CustomNpgsqlConnection.npgsqlConnection.Execute(sql, model);
 
-        T First<T>(string sql, object model) where T : class;
-
-        List<TList> Select<TList>(string sql, object model = null) where TList : class;
-
-        bool Delete(string sql, object model);
-
-        bool Update(string sql, object model);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
-    static class CustomNpgsqlConnection
+    public T First<T>(string sql, object model) where T : class
     {
-        private static readonly string connectionString =
-            "User ID=username;Password=password;Host=localhost;Port=5432;Database=workfollow;";
-
-        static NpgsqlConnection _npgsqlConnection;
-        //proxy
-        public static NpgsqlConnection npgsqlConnection
+        try
         {
-            get
-            {
-                if (_npgsqlConnection == null)
-                {
-                    _npgsqlConnection = new NpgsqlConnection(connectionString);
-                    _npgsqlConnection.Open();
-                }
-
-                return _npgsqlConnection;
-            }
+            return CustomNpgsqlConnection.npgsqlConnection.QueryFirst<T>(sql, model);
         }
-
+        catch
+        {
+            return null;
+        }
     }
 
-    /// <summary>
-    /// Database üzerinde tüm işlemleri yapmamızı sağlar
-    /// </summary>
-    public class GenericRepository : IGenericRepository
+    public bool Insert(string sql, object model = null)
     {
-
-
-        public void BeginTransaction()
+        try
         {
-            CustomNpgsqlConnection.npgsqlConnection.Execute("BEGIN TRANSACTION;");
-        }
+            CustomNpgsqlConnection.npgsqlConnection.Execute(sql, model);
 
-        public void RollBackTransaction()
+            return true;
+        }
+        catch
         {
-            CustomNpgsqlConnection.npgsqlConnection.Execute("ROLLBACK;");
+            return false;
         }
-
-        public bool Delete(string sql, object model)
-        {
-            try
-            {
-                CustomNpgsqlConnection.npgsqlConnection.Execute(sql, model);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public T First<T>(string sql, object model) where T : class
-        {
-            try
-            {
-
-                return CustomNpgsqlConnection.npgsqlConnection.QueryFirst<T>(sql, model);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public bool Insert(string sql, object model = null)
-        {
-            try
-            {
-
-                CustomNpgsqlConnection.npgsqlConnection.Execute(sql, model);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public int InsertAndGetId(string sql, object model = null)
-        {
-            try
-            {
-                int id = 0;
-
-                sql += " RETURNING Id";
-
-                id = CustomNpgsqlConnection.npgsqlConnection.QueryFirst<int>(sql, model);
-
-                return id;
-            }
-            catch
-            {
-                return 0;
-            }
-        }
-
-        public IEnumerable<dynamic> Select(string sql, object model = null)
-        {
-            try
-            {
-
-                return CustomNpgsqlConnection.npgsqlConnection.Query(sql, model);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public List<TList> Select<TList>(string sql, object model = null) where TList : class
-        {
-            try
-            {
-                return CustomNpgsqlConnection.npgsqlConnection.Query<TList>(sql, model).ToList();
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public bool Update(string sql, object model)
-        {
-            try
-            {
-                CustomNpgsqlConnection.npgsqlConnection.Execute(sql, model);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
     }
 
-    public static class SGenericRepository
+    public int InsertAndGetId(string sql, object model = null)
     {
-        private static readonly string connectionString =
-            "User ID=postgres;Password=localpass;Host=localhost;Port=5432;Database=dbodevtakip;";
-
-        public static List<dynamic> Select(string sql, object model = null)
+        try
         {
-            try
-            {
-                return CustomNpgsqlConnection.npgsqlConnection.Query(sql, model).ToList();
-            }
-            catch
-            {
-                return null;
-            }
+            var id = 0;
+
+            sql += " RETURNING Id";
+
+            id = CustomNpgsqlConnection.npgsqlConnection.QueryFirst<int>(sql, model);
+
+            return id;
         }
+        catch
+        {
+            return 0;
+        }
+    }
+
+    public IEnumerable<dynamic> Select(string sql, object model = null)
+    {
+        try
+        {
+            return CustomNpgsqlConnection.npgsqlConnection.Query(sql, model);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    public List<TList> Select<TList>(string sql, object model = null) where TList : class
+    {
+        try
+        {
+            return CustomNpgsqlConnection.npgsqlConnection.Query<TList>(sql, model).ToList();
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    public bool Update(string sql, object model)
+    {
+        try
+        {
+            CustomNpgsqlConnection.npgsqlConnection.Execute(sql, model);
+
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 
 
+    public void BeginTransaction()
+    {
+        CustomNpgsqlConnection.npgsqlConnection.Execute("BEGIN TRANSACTION;");
+    }
+
+    public void RollBackTransaction()
+    {
+        CustomNpgsqlConnection.npgsqlConnection.Execute("ROLLBACK;");
+    }
+}
+
+public static class SGenericRepository
+{
+    public static List<dynamic> Select(string sql, object model = null)
+    {
+        try
+        {
+            return CustomNpgsqlConnection.npgsqlConnection.Query(sql, model).ToList();
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

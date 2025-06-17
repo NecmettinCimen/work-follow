@@ -1,8 +1,7 @@
-﻿namespace OdevTakip.Entities
+﻿namespace WorkFollow.Entities;
+
+public class TblNot : BaseEntity
 {
-    public class TblNot : BaseEntity
-    {
-        public string Konu { get; set; }
-        public string Aciklama { get; set; }
-    }
+    public string Konu { get; set; }
+    public string Aciklama { get; set; }
 }

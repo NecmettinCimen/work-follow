@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/OdevTakip/bin/Debug/net8.0/OdevTakip.dll",
+            "program": "${workspaceFolder}/WorkFollow.Web/bin/Debug/net9.0/WorkFollow.Web.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/OdevTakip",
+            "cwd": "${workspaceFolder}/WorkFollow.Web",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {

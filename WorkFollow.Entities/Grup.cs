@@ -1,9 +1,8 @@
-﻿namespace OdevTakip.Entities
+﻿namespace WorkFollow.Entities;
+
+public class Grup : BaseEntity
 {
-    public class Grup : BaseEntity
-    {
-        public string ad { get; set; }
-        public string aciklama { get; set; }
-        public int yoneticiid { get; set; }
-    }
+    public string ad { get; set; }
+    public string aciklama { get; set; }
+    public int yoneticiid { get; set; }
 }

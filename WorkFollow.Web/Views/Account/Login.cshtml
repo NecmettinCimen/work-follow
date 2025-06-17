@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Login";
     Layout = null;
-    string error = ViewData["error"] as string;
+    var error = ViewData["error"] as string;
 }
 <!doctype html>
 <html lang="en">
@@ -14,63 +14,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A project management Bootstrap theme by Medium Rare">
     <link href="~/assets/img/favicon.ico" rel="icon" type="image/x-icon">
-    <link href="~/css/icon.css" rel="stylesheet" />
-    <link href="~/css/css.css" rel="stylesheet" />
+    <link href="~/css/icon.css" rel="stylesheet"/>
+    <link href="~/css/css.css" rel="stylesheet"/>
     <link href="~/assets/css/theme.css" rel="stylesheet" type="text/css" media="all">
 </head>
 
 <body>
-    <div class="main-container fullscreen">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-5 col-lg-6 col-md-7">
-                    <div class="text-center">
-                        <h1 class="h2">Welcome Back &#x1f44b;</h1>
-                        <p class="lead">Log in to your account to continue</p>
-                        @if (error == "true")
-                        {
-                            <div class="alert alert-danger" role="alert">
-                                A simple danger alert—check it out!
+<div class="main-container fullscreen">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-7">
+                <div class="text-center">
+                    <h1 class="h2">Welcome Back &#x1f44b;</h1>
+                    <p class="lead">Log in to your account to continue</p>
+                    @if (error == "true")
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            A simple danger alert—check it out!
+                        </div>
+                    }
+                    <form method="post">
+                        <div class="form-group">
+                            <input class="form-control" type="email" placeholder="Email Address" name="eposta" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" placeholder="Password" name="sifre" required>
+                            <div class="text-right">
+                                <small>
+                                    <a href="#">Forgot password?</a>
+                                </small>
                             </div>
-                        }
-                        <form method="post">
-                            <div class="form-group">
-                                <input class="form-control" type="email" placeholder="Email Address" name="eposta" required>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" type="password" placeholder="Password" name="sifre" required>
-                                <div class="text-right">
-                                    <small>
-                                        <a href="#">Forgot password?</a>
-                                    </small>
-                                </div>
-                            </div>
-                            <button class="btn btn-lg btn-block btn-primary" role="button" type="submit">
-                                Log in
-                            </button>
-                            <small>
-                                Don't have an account yet? <a href="/Account/Register">Create one</a>
-                            </small>
-                        </form>
-                    </div>
+                        </div>
+                        <button class="btn btn-lg btn-block btn-primary" role="button" type="submit">
+                            Log in
+                        </button>
+                        <small>
+                            Don't have an account yet? <a href="/Account/Register">Create one</a>
+                        </small>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script type="text/javascript" src="~/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="~/js/autosize.min.js"></script>
-    <script type="text/javascript" src="~/js/popper.min.js"></script>
-    <script type="text/javascript" src="~/js/prism.min.js"></script>
-    <script type="text/javascript" src="~/js/draggable.bundle.legacy.js"></script>
-    <script type="text/javascript" src="~/js/swap-animation.js"></script>
-    <script type="text/javascript" src="~/js/dropzone.min.js"></script>
-    <script type="text/javascript" src="~/js/list.min.js"></script>
-    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="~/assets/js/theme.js"></script>
+<script type="text/javascript" src="~/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="~/js/autosize.min.js"></script>
+<script type="text/javascript" src="~/js/popper.min.js"></script>
+<script type="text/javascript" src="~/js/prism.min.js"></script>
+<script type="text/javascript" src="~/js/draggable.bundle.legacy.js"></script>
+<script type="text/javascript" src="~/js/swap-animation.js"></script>
+<script type="text/javascript" src="~/js/dropzone.min.js"></script>
+<script type="text/javascript" src="~/js/list.min.js"></script>
+<script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="~/assets/js/theme.js"></script>
 
 
-    <link href="~/css/login.css" rel="stylesheet" />
+<link href="~/css/login.css" rel="stylesheet"/>
 
 
 </body>

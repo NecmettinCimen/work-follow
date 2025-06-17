@@ -1,39 +1,37 @@
-using WorkFollow.Web.Entities;
-using WorkFollow.Web.Services;
-using System;
+using WorkFollow.Entities;
+using WorkFollow.Services;
 using Xunit;
 
-namespace OdevTakip.Test
+namespace WorkFollow.Test;
+
+public class KullaniciServiceTest
 {
-    public class KullaniciServiceTest
+    private readonly KullaniciService _kullaniciService;
+
+    public KullaniciServiceTest()
     {
-        readonly KullaniciService _kullaniciService;
+        _kullaniciService = new KullaniciService(new GenericRepository());
+    }
 
-        public KullaniciServiceTest()
+    [Fact]
+    public void InsertLoginKontrolTest()
+    {
+        Kullanici kullanici = _kullaniciService.Insert(new Kullanici
         {
-            _kullaniciService = new KullaniciService(new GenericRepository());
-        }
+            Ad = "Test",
+            Cinsiyet = "Erkek",
+            Eposta = "test@test.com",
+            Sifre = "***"
+        });
 
-        [Fact]
-        public void InsertLoginKontrolTest()
+        Assert.NotNull(kullanici);
+
+        Kullanici kullanici2 = _kullaniciService.LoginKontrol(new Kullanici
         {
-            Kullanici kullanici =_kullaniciService.Insert(new Kullanici
-            {
-                Ad="Test",
-                Cinsiyet="Erkek",
-                Eposta="test@test.com",
-                Sifre="***"
-            });
+            Eposta = "test@test.com",
+            Sifre = "***"
+        });
 
-            Assert.NotNull(kullanici);
-
-            Kullanici kullanici2 = _kullaniciService.LoginKontrol(new Kullanici
-            {
-                Eposta = "test@test.com",
-                Sifre = "***"
-            });
-
-            Assert.NotNull(kullanici2);
-        }
+        Assert.NotNull(kullanici2);
     }
 }

@@ -10,19 +10,19 @@
 <br />
 <p align="center">
 
-  <h3 align="center">OdevTakip App .Net Core App</h3>
+  <h3 align="center">Work Follow App .Net Core App</h3>
 
   <p align="center">
-    OdevTakip App .Net Core App
+    Work Follow .Net Core App
     <br />
-    <a href="https://github.com/necmettincimen/OdevTakip"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/necmettincimen/work-follow"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://work-follow.necmettincimen.xyz/Account/Login">View Demo</a>
     ·
-    <a href="https://github.com/necmettincimen/OdevTakip/issues">Report Bug</a>
+    <a href="https://github.com/necmettincimen/work-follow/issues">Report Bug</a>
     ·
-    <a href="https://github.com/necmettincimen/OdevTakip/issues">Request Feature</a>
+    <a href="https://github.com/necmettincimen/work-follow/issues">Request Feature</a>
   </p>
 </p>
 
@@ -60,7 +60,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-OdevTakip App .Net Core 2.2
+WorkFollow App .Net Core 9.0
 
 A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
@@ -79,17 +79,17 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-https://dotnet.microsoft.com/download/dotnet/2.1
+https://dotnet.microsoft.com/download/dotnet/9.0
 
 ### Installation
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/necmettincimen/OdevTakip.git
+   git clone https://github.com/necmettincimen/work-follow.git
    ```
 2. Goto Directory
    ```sh
-   cd OdevTakip
+   cd WorkFollow
    ```
 3. Run Project
    ```sh
@@ -100,11 +100,11 @@ https://dotnet.microsoft.com/download/dotnet/2.1
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/necmettincimen/OdevTakip.git
+   git clone https://github.com/necmettincimen/work-follow.git
    ```
    Goto Directory
    ```sh
-   cd OdevTakip
+   cd WorkFollow
    ```
 2. Publish
    ```sh
@@ -116,7 +116,7 @@ https://dotnet.microsoft.com/download/dotnet/2.1
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/necmettincimen/OdevTakip/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/necmettincimen/work-follow/issues) for a list of proposed features (and known issues).
 
 
 
@@ -143,9 +143,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@Necmettin Cimen](https://necmettin.me) - [mail@necmettin.me](mailto:mail@necmettin.me)
+Necmettin Çimen - [@Necmettin Cimen](https://necmettincimen.github.iı) - [necmettin.dev@gmail.com](mailto:necmettin.dev@gmail.com)
 
-Project Link: [https://github.com/necmettincimen/OdevTakip](https://github.com/necmettincimen/OdevTakip)
+Project Link: [https://github.com/necmettincimen/work-follow](https://github.com/necmettincimen/work-follow)
 
 
 
@@ -156,15 +156,15 @@ Project Link: [https://github.com/necmettincimen/OdevTakip](https://github.com/n
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/necmettincimen/OdevTakip.svg?style=for-the-badge
-[contributors-url]: https://github.com/necmettincimen/OdevTakip/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/necmettincimen/OdevTakip.svg?style=for-the-badge
-[forks-url]: https://github.com/necmettincimen/OdevTakip/network/members
-[stars-shield]: https://img.shields.io/github/stars/necmettincimen/OdevTakip.svg?style=for-the-badge
-[stars-url]: https://github.com/necmettincimen/OdevTakip/stargazers
-[issues-shield]: https://img.shields.io/github/issues/necmettincimen/OdevTakip.svg?style=for-the-badge
-[issues-url]: https://github.com/necmettincimen/OdevTakip/issues
-[license-shield]: https://img.shields.io/github/license/necmettincimen/OdevTakip.svg?style=for-the-badge
-[license-url]: https://github.com/necmettincimen/OdevTakip/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/necmettincimen/WorkFollow.svg?style=for-the-badge
+[contributors-url]: https://github.com/necmettincimen/work-follow/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/necmettincimen/WorkFollow.svg?style=for-the-badge
+[forks-url]: https://github.com/necmettincimen/work-follow/network/members
+[stars-shield]: https://img.shields.io/github/stars/necmettincimen/WorkFollow.svg?style=for-the-badge
+[stars-url]: https://github.com/necmettincimen/work-follow/stargazers
+[issues-shield]: https://img.shields.io/github/issues/necmettincimen/WorkFollow.svg?style=for-the-badge
+[issues-url]: https://github.com/necmettincimen/work-follow/issues
+[license-shield]: https://img.shields.io/github/license/necmettincimen/WorkFollow.svg?style=for-the-badge
+[license-url]: https://github.com/necmettincimen/work-follow/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/necmettincimen

@@ -1,7 +1,7 @@
-﻿@model  OdevTakip.Models.GenericIndexDto<OdevTakip.Entities.Grup>
+﻿@model GenericIndexDto<WorkFollow.Entities.Grup>
 @{
     ViewData["Title"] = "Home Page";
-    string error = ViewData["success"] as string;
+    var error = ViewData["success"] as string;
 }
 
 
@@ -46,7 +46,8 @@
 
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#teams" role="tab" aria-controls="teams" aria-selected="true">Teams</a>
+                        <a class="nav-link active" data-toggle="tab" href="#teams" role="tab" aria-controls="teams"
+                           aria-selected="true">Teams</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Project/Index">Projects</a>
@@ -56,7 +57,8 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="teams" role="tabpanel" aria-labelledby="teams-tab" data-filter-list="content-list-body">
+                    <div class="tab-pane fade show active" id="teams" role="tabpanel" aria-labelledby="teams-tab"
+                         data-filter-list="content-list-body">
                         <div class="row content-list-head">
                             <div class="col-auto">
                                 <h3>Teams</h3>
@@ -65,7 +67,8 @@
                                 </button>
                             </div>
                             <form class="col-md-auto">
-                                <a title="@Model.sort" href="/Home/Index?sort=@Model.SortSelect()" class="btn btn-round">
+                                <a title="@Model.sort" href="/Home/Index?sort=@Model.SortSelect()"
+                                   class="btn btn-round">
                                     <i class="material-icons">sort</i>
                                 </a>
                                 <div class="input-group input-group-round">
@@ -74,27 +77,35 @@
                                             <i class="material-icons">filter_list</i>
                                         </span>
                                     </div>
-                                    <input onkeyup="searchHtml(this)" data-tableid="dataList" type="search" class="form-control filter-list-input" placeholder="Filter teams" aria-label="Filter teams" aria-describedby="filter-teams">
+                                    <input onkeyup="searchHtml(this)" data-tableid="dataList" type="search"
+                                           class="form-control filter-list-input" placeholder="Filter teams"
+                                           aria-label="Filter teams" aria-describedby="filter-teams">
                                 </div>
                             </form>
                         </div>
                         <!--end of content list head-->
                         <div class="content-list-body row" id="dataList">
 
-                            @foreach (OdevTakip.Entities.Grup grup in Model.list)
+                            @foreach (WorkFollow.Entities.Grup grup in Model.list)
                             {
                                 <div class="col-md-6 searchDiv">
                                     <div class="card card-team">
                                         <div class="card-body">
                                             <div class="dropdown card-options">
-                                                <button class="btn-options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <button class="btn-options" type="button" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
                                                     <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <button type="button" class="dropdown-item" onclick="editAnyItem(this)" data-url="/Team/EditTeam" data-form="team-add-modal" data-id="@grup.Id">Manage</button>
+                                                    <button type="button" class="dropdown-item"
+                                                            onclick="editAnyItem(this)" data-url="/Team/EditTeam"
+                                                            data-form="team-add-modal" data-id="@grup.Id">Manage
+                                                    </button>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item text-danger" href="#">Leave Team</a>
-                                                    <button type="button" class="dropdown-item text-danger" onclick="deleteAnyItem('/Team/DeleteTeam', @grup.Id)">Delete</button>
+                                                    <button type="button" class="dropdown-item text-danger"
+                                                            onclick="deleteAnyItem('/Team/DeleteTeam', @grup.Id)">Delete
+                                                    </button>
                                                 </div>
                                             </div>
                                             <div class="card-title">
@@ -103,7 +114,7 @@
                                                 </a>
                                                 <span>@grup.aciklama</span>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +129,8 @@
             </div>
         </div>
     </div>
-    <form class="modal fade" action="/Team/InsertTeam" method="post" id="team-add-modal" tabindex="-1" role="dialog" aria-labelledby="team-add-modal" aria-hidden="true">
+    <form class="modal fade" action="/Team/InsertTeam" method="post" id="team-add-modal" tabindex="-1" role="dialog"
+          aria-labelledby="team-add-modal" aria-hidden="true">
         <input hidden type="text" name="id" id="team-add-modal_id">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -130,15 +142,18 @@
                 </div>
                 <div class="modal-body">
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="team-add-details" role="tabpanel" aria-labelledby="team-add-details-tab">
+                        <div class="tab-pane fade show active" id="team-add-details" role="tabpanel"
+                             aria-labelledby="team-add-details-tab">
                             <h6>Team Details</h6>
                             <div class="form-group row align-items-center">
                                 <label class="col-3">Name</label>
-                                <input class="form-control col" type="text" placeholder="Team name" name="ad" id="team-add-modal_ad" required>
+                                <input class="form-control col" type="text" placeholder="Team name" name="ad"
+                                       id="team-add-modal_ad" required>
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Description</label>
-                                <textarea class="form-control col" rows="3" placeholder="Team description" name="aciklama" id="team-add-modal_aciklama"></textarea>
+                                <textarea class="form-control col" rows="3" placeholder="Team description"
+                                          name="aciklama" id="team-add-modal_aciklama"></textarea>
                             </div>
                         </div>
 

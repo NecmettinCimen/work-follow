@@ -1,69 +1,68 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OdevTakip.Entities;
-using OdevTakip.Filters;
-using OdevTakip.Models;
-using OdevTakip.Services;
+using WorkFollow.Entities;
+using WorkFollow.Services;
+using WorkFollow.Web.Filters;
+using WorkFollow.Web.Models;
 
-namespace OdevTakip.Controllers
+namespace WorkFollow.Web.Controllers;
+
+[CustomAuthorize]
+public class TeamController : Controller
 {
-    [CustomAuthorizeAttribute]
-    public class TeamController : Controller
+    private readonly IGrupService _grupService;
+
+    public TeamController(IGrupService grupService)
     {
-        private readonly IGrupService _grupService;
+        _grupService = grupService;
+    }
 
-        public TeamController(IGrupService grupService)
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public ActionResult InsertTeam(Grup model)
+    {
+        var result = false;
+        if (model.Id == 0)
         {
-            _grupService = grupService;
+            model.yoneticiid = HttpContext.Session.GetInt32("kullaniciid").Value;
+            model.Olusturankisi = model.yoneticiid;
+            result = _grupService.Insert(model);
+        }
+        else
+        {
+            model.Guncelleyenkisi = HttpContext.Session.GetInt32("kullaniciid").Value;
+            result = _grupService.Update(model);
         }
 
-        public IActionResult Index()
+        if (result)
         {
-            return View();
+            GenericModels.GrupOptionRefresh();
+
+            ViewData["success"] = "true";
+        }
+        else
+        {
+            ViewData["success"] = "false";
         }
 
-        [HttpPost]
-        public ActionResult InsertTeam(Grup model)
-        {
-            bool result = false;
-            if (model.Id == 0)
-            {
-                model.yoneticiid = HttpContext.Session.GetInt32("kullaniciid").Value;
-                model.Olusturankisi = model.yoneticiid;
-                result = _grupService.Insert(model);
-            }
-            else
-            {
-                model.Guncelleyenkisi = HttpContext.Session.GetInt32("kullaniciid").Value;
-                result = _grupService.Update(model);
-            }
+        return Redirect("/Home/Index");
+    }
 
-            if (result)
-            {
-                GenericModels.GrupOptionRefresh();
+    [HttpPost]
+    public ActionResult DeleteTeam([FromBody] Grup model)
+    {
+        bool result = _grupService.Delete(model);
+        return Json(result);
+    }
 
-                ViewData["success"] = "true";
-            }
-            else
-            {
-                ViewData["success"] = "false";
-            }
-
-            return Redirect("/Home/Index");
-        }
-
-        [HttpPost]
-        public ActionResult DeleteTeam([FromBody]Grup model)
-        {
-            bool result = _grupService.Delete(model);
-            return Json(result);
-        }
-
-        [HttpPost]
-        public ActionResult EditTeam([FromBody]Grup model)
-        {
-            Grup result = _grupService.First(model);
-            return Json(result);
-        }
+    [HttpPost]
+    public ActionResult EditTeam([FromBody] Grup model)
+    {
+        Grup result = _grupService.First(model);
+        return Json(result);
     }
 }

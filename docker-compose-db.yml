@@ -1,0 +1,17 @@
+version: '1.0'
+
+services:
+  postgres:
+    container_name: postgres-db
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=localpass
+      - POSTGRES_DB=dbodevtakip
+    ports:
+      - 5432:5432
+
+networks:
+  default:
+      name: srvnecmettin

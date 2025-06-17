@@ -1,42 +1,41 @@
-﻿using WorkFollow.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using WorkFollow.Entities;
 
-namespace OdevTakip.Services
+namespace WorkFollow.Services;
+
+public abstract class SortStrategy
 {
-    public abstract class SortStrategy
+    public abstract List<T> Sort<T>(List<T> list) where T : BaseEntity;
+}
+
+public class IdSort : SortStrategy
+{
+    public override List<T> Sort<T>(List<T> list)
     {
-        public abstract List<T> Sort<T>(List<T> list) where T : BaseEntity;
+        return list.OrderBy(x => x.Id).ToList();
+    }
+}
+
+public class DateSort : SortStrategy
+{
+    public override List<T> Sort<T>(List<T> list)
+    {
+        return list.OrderByDescending(x => x.OlusturmaTarihi).ToList();
+    }
+}
+
+public class SortedList
+{
+    private SortStrategy _sortstrategy;
+
+    public void SetSortStrategy(SortStrategy sortstrategy)
+    {
+        _sortstrategy = sortstrategy;
     }
 
-    public class IdSort : SortStrategy
+    public List<T> Sort<T>(List<T> list) where T : BaseEntity
     {
-        public override List<T> Sort<T>(List<T> list)
-        {
-            return list.OrderBy(x => x.Id).ToList();
-        }
-
+        return _sortstrategy.Sort(list);
     }
-
-    public class DateSort : SortStrategy
-    {
-        public override List<T> Sort<T>(List<T> list)
-        {
-            return list.OrderByDescending(x => x.OlusturmaTarihi).ToList();
-        }
-    }
-
-    public class SortedList
-    {
-        private SortStrategy _sortstrategy;
-        public void SetSortStrategy(SortStrategy sortstrategy)
-        {
-            this._sortstrategy = sortstrategy;
-        }
-        public List<T> Sort<T>(List<T> list) where T: BaseEntity 
-        {
-            return _sortstrategy.Sort<T>(list);
-        }
-    }
-
 }

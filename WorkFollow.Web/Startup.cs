@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OdevTakip.Models;
-using OdevTakip.Services;
-using System;
+using WorkFollow.Services;
+using WorkFollow.Web.Models;
 
-namespace OdevTakip
+namespace WorkFollow.Web
 {
     public class Startup
     {
@@ -55,22 +54,17 @@ namespace OdevTakip
             //ilk atamaları yapabilmek için
             GenericModels.Nesne();
 
-            services.AddMvc(options=>options.EnableEndpointRouting=false);
-services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
+            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
             else
-            {
                 app.UseExceptionHandler("/Home/Error");
-            }
 
             app.UseStaticFiles();
             app.UseSession();
@@ -79,14 +73,15 @@ services.AddControllersWithViews().AddRazorRuntimeCompilation();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
 }
+
 /// <summary>
-/// factory Method
+///     factory Method
 /// </summary>
 public static class ServiceCollectionExtensions
 {
