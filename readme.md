@@ -1,4 +1,3 @@
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -13,7 +12,7 @@
   <h3 align="center">Work Follow App .Net Core App</h3>
 
   <p align="center">
-    Work Follow .Net Core App
+    Work tracking system - High-performance data access with Dapper ORM
     <br />
     <a href="https://github.com/necmettincimen/work-follow"><strong>Explore the docs »</strong></a>
     <br />
@@ -60,7 +59,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-WorkFollow App .Net Core 9.0
+Work tracking system - High-performance data access with Dapper ORM
 
 A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
@@ -69,6 +68,8 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 | [![WEB](work-follow.gif)](work-follow.gif)
 
 ### Built With
+
+**Technologies:** `csharp` `dotnet9` `dapper` `razorpages` `workflowmanagement`
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 * [.Net Core](https://dotnet.microsoft.com/)
@@ -160,15 +161,15 @@ Project Link: [https://github.com/necmettincimen/work-follow](https://github.com
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/necmettincimen/WorkFollow.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/necmettincimen/work-follow.svg?style=for-the-badge
 [contributors-url]: https://github.com/necmettincimen/work-follow/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/necmettincimen/WorkFollow.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/necmettincimen/work-follow.svg?style=for-the-badge
 [forks-url]: https://github.com/necmettincimen/work-follow/network/members
-[stars-shield]: https://img.shields.io/github/stars/necmettincimen/WorkFollow.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/necmettincimen/work-follow.svg?style=for-the-badge
 [stars-url]: https://github.com/necmettincimen/work-follow/stargazers
-[issues-shield]: https://img.shields.io/github/issues/necmettincimen/WorkFollow.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/necmettincimen/work-follow.svg?style=for-the-badge
 [issues-url]: https://github.com/necmettincimen/work-follow/issues
-[license-shield]: https://img.shields.io/github/license/necmettincimen/WorkFollow.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/necmettincimen/work-follow.svg?style=for-the-badge
 [license-url]: https://github.com/necmettincimen/work-follow/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/necmettincimen
