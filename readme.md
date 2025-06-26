@@ -148,7 +148,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Necmettin Çimen - [@Necmettin Cimen](https://necmettincimen.github.iı) - [necmettin.dev@gmail.com](mailto:necmettin.dev@gmail.com)
+Necmettin Çimen - [@Necmettin Cimen](https://necmettincimen.github.io) - [necmettin.dev@gmail.com](mailto:necmettin.dev@gmail.com)
 
 Project Link: [https://github.com/necmettincimen/work-follow](https://github.com/necmettincimen/work-follow)
 
